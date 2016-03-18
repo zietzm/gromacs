@@ -9,7 +9,8 @@ care.
 <br><br>
 To begin on a new machine, we would need to clone our Git repository from
 GitHub.
-<pre><code>git clone </code></pre>
+<pre><code>git clone git@github.com:zietzm/gromacs-information.git
+ </code></pre>
 
 Now, an outline of what we have to do when we are working locally.
 1. Save our altered file locally. Ctrl-s works for this.
