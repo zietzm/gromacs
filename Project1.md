@@ -22,6 +22,10 @@ number-- we need to start using Gromacs.
 
 ## Setup lipids-water system
 
+First, open Gromacs. Under my installation we enter:
+```source /usr/local/gromacs/bin/GMXRC
+```
+
 Let's start by making a box and filling it with one of our chosen lipids.
 <pre><code>genbox</code></pre>
 Above, -ci is the molecule as a .pdb or a .gro, -nmol is the number of

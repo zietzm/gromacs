@@ -1,3 +1,6 @@
+; Start Gromacs
+source /usr/local/gromacs/bin/GMXRC
+
 ; Box with first lipid
 genbox -ci LIPID1.gro -nmol XXX -box XXX XXX XXX -try 500 -o lipid1.gro
 grompp -minimization.mdp -c lipid1.gro -p lipid.top -maxwarn 10 -o lipid1-min.tpr
@@ -15,4 +18,4 @@ mdrun -deffnm water-lipids-min -v -c solvmin.gro
 
 ; Equilibrate the system
 grompp -f martini_md.mdp ;be sure this is from Martini directly; -c solvmin.gro -p lipid.top -maxwarn 10 -o solv-md.tpr
-mdrun -deffnm solv-md -v 
+mdrun -deffnm solv-md -v
