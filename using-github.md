@@ -3,7 +3,7 @@ We are using GitHub for this project so that we can use native text editors on
 Windows and Ubuntu. However, this process is not as seamless as we would hope.
 <br><br>
 Whenever changes are made at GitHub or locally on any machine, we have to be
-*VERY* careful that we do not get ahead of or behind other versions of
+<b>very</b> careful that we do not get ahead of or behind other versions of
 ourselves. This is definitely doable, but it will require some discipline and
 care.
 <br><br>
