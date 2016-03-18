@@ -12,11 +12,8 @@ GitHub.
 <pre><code>git clone git@github.com:zietzm/gromacs-information.git
  </code></pre>
 
-Now, an outline of what we have to do when we are working locally.
+<b>Now, an outline of saving local work to GitHub.</b>
 1. Save our altered file locally. Ctrl-s works for this.
-2. Stage our altered file.
-<pre><code>git add FILE.EXT</pre></code>
-3. Commit changes.
-<pre><code>git commit -m "Comment" </pre></code>
-4. Push changes to GitHub.
-<pre><code>git push origin master</pre></code>
+2. Stage our altered file. <pre><code>git add FILE.EXT</code></pre>
+3. Commit changes. <pre><code>git commit -m "Comment" </code></pre>
+4. Push changes to GitHub. <pre><code>git push origin master</code></pre>
