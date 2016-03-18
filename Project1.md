@@ -15,7 +15,7 @@ box size for our lipid simulation.
 simulation because we had a box that was too small with periodic boundary
 conditions. We should try to make the box a better size this time.*
 
-<img src ="lipid-md2.png" alt = "Lipid Image" style="width:300px;height:150px;">
+<img src ="/images/lipid-md2.png" alt = "Lipid Image" style="width:300px;height:150px;">
 
 If all the above have been chosen-- lipids, compositions, box size,
 number-- we need to start using Gromacs.
