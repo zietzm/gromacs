@@ -15,7 +15,7 @@ box size for our lipid simulation.
 simulation because we had a box that was too small with periodic boundary 
 conditions. We should try to make the box a better size this time.*
 
-<img src ="lipid-md2.png" alt = "Lipid Image" style="width:600px;height:300px">
+<img src ="lipid-md2.png" alt = "Lipid Image" style="width:300px;height:150px;">
 
 If all the above have been chosen-- lipids, compositions, box size, number-- we 
 need to start using Gromacs. 
@@ -32,36 +32,36 @@ That shouldn't have taken long at all. We now move on by adding our other lipid.
 To avoid any complications that arise when we try to merge to output files, we 
 will use a trick to "solvate" the output file from our first simulation with our
 chosen second lipid. 
-    <pre><code>genbox</code></pre>
+<pre><code>genbox</code></pre>
     
 Again, we setup and run a minimisation of the system's free energy. First, 
 though, we need to open our topology file, lipid.top and uncomment the lipid
 we just added. You can do this with nano lipid.top or just open it using a text
 editor.
-    <pre><code>grompp
-    mdrun</code></pre>
+<pre><code>grompp
+mdrun</code></pre>
 
 Now we have an equilibrated system with two types of lipids. To simulate real 
 conditions, we will add water to the system. This time, we use <pre><code> genbox </code></pre>
 to solvate our last output with our system's actual solvent. Again, we run a 
 minimisation.
-    <pre><code>genbox</code></pre>
+<pre><code>genbox</code></pre>
 
 Again, edit the topology file to uncomment water. Now run the equilibration.
-    <pre><code>grompp
-    mdrun</code></pre>
+<pre><code>grompp
+mdrun</code></pre>
     
 It is now time for us to run the full simulation using our real .mdp file,
 martini_md.mdp. This .mdp file will use XXXX steps of 30 fs to simulate a time
 of 200 ns. 
-    <pre><code>grompp
-    mdrun</code></pre>
+<pre><code>grompp
+mdrun</code></pre>
     
 We have now finished what should be our bicelle! To check how this simulation
 went, lets use VMD to visually inspect our product.
-    <pre><code>vmd </code></pre>
+<pre><code>vmd </code></pre>
 
 Lets draw the bonds so we can better see what's going on. Open the TK console 
 from the extensions tab and draw the bonds.
-    <pre><code>source cg_bonds.tcl
-    cg_bonds -top lipid.top</code></pre>
+<pre><code>source cg_bonds.tcl
+cg_bonds -top lipid.top</code></pre>
