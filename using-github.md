@@ -1,14 +1,14 @@
 # Using GitHub
 We are using GitHub for this project so that we can use native text editors on
 Windows and Ubuntu. However, this process is not as seamless as we would hope.
-<b><b>
+<br><br>
 Whenever changes are made at GitHub or locally on any machine, we have to be
 *VERY* careful that we do not get ahead of or behind other versions of
 ourselves. This is definitely doable, but it will require some discipline and
 care.
 
 
-<b><b>
+<br><br>
 To begin on a new machine, we would need to clone our Git repository from
 GitHub.
 <pre><code>git clone </code></pre>
