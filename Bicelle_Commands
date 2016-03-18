@@ -1,0 +1,18 @@
+; Box with first lipid
+genbox -ci LIPID.gro -nmol XXX -box XXX XXX XXX -try 500 -o lipid1.gro
+grompp 
+mdrun
+
+; Box with second lipid solvating the last output
+genbox
+grompp
+mdrun
+
+; Solvate with water
+genbox
+grompp
+mdrun
+
+; Equilibrate the system
+grompp
+mdrun
