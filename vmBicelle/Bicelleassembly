@@ -1,0 +1,29 @@
+source /usr/local/gromacs/bin/GMXRC
+
+# Make a box with 338 short-tailed lipids
+genbox -ci dhpc_single.gro -nmol 338 -box 23.9, 8.1, 20.4 -try 500 -o 338dhpc.gro
+grompp -f minimization.mdp -c 338dhpc.gro -p lipid.top -maxwarn 10 -o 338min.tpr
+mdrun -deffnm 338min -v -c 338-min.gro
+
+# Add in 628 dlpc
+genbox -cp 338dhpc.gro -cs dlpc_single.gro -o both3.gro -maxsol 628
+grompp -f minimization.mdp -c both3.gro -p lipid.top -maxwarn 10 -o both-min.tpr
+mdrun -deffnm both-min -v -c both-min1.gro
+
+;FILL THE SIMULATION BOX WITH 768 WATER MOLECULES AND PERFORM AN ENERGY MINIMIZATION
+genbox -cp 128_minimised.gro -cs water.gro -o waterbox.gro -maxsol 768 -vdwd 0.21
+grompp -f minimization.mdp -c waterbox.gro -p lipid.top -maxwarn 10 -o lipid-min-solvent.tpr
+mdrun -deffnm lipid-min-solvent -v -c minimised.gro
+
+;RUN AN MD SIMULATION TO EQUILIBRATE THE WATER / LIPID SYSTEM
+grompp -f martini_md.mdp -c minimised.gro -p lipid.top -maxwarn 10 -o lipid-md.tpr
+mdrun -deffnm lipid-md -v
+
+;CONTINUE THE MD SIMULATION IN CASE A NICE BILAYER HAS NOT FORMED, NOTE: TIME IS IN PS
+tpbconv -s lipid-md.tpr -extend 30000 -o next.tpr1
+mdrun -s next1.tpr -cpi lipid-md.cpt
+
+;FIX MOLECULES BROKEN ACROSS PERIODIC BOUNDARY CONDITIONS TO OBTAIN NICE BILAYER MEMBRANE
+trjconv -f lipid-md.xtc -o trajfixed.xtc -s lipid-md.tpr -pbc mol
+source cg_bonds.tcl
+cg_bonds -top lipid.top
