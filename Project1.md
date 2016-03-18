@@ -35,7 +35,9 @@ Above, -ci is the molecule as a .pdb or a .gro, -nmol is the number of
 molecules, -box gives
 the box dimensions in nanometers, -try is the number of attempts to
 generate the box (sometimes trying to throw a large number of lipids
-together into a box doesn't work), -o gives the output as a .gro file.<br><br>
+together into a box doesn't work), -o gives the output as a .gro file.
+
+
 Now lets setup and run an equilibration to minimise the system's free
 energy. <br><br> Here, -f is the md file, which tells mdrun what to do, -c is
 input, -p is the topology file to be made, -maxwarn is optional to tell
