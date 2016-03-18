@@ -17,8 +17,10 @@ conditions. We should try to make the box a better size this time.*
 
 <img src ="lipid-md2.png" alt = "Lipid Image" style="width:300px;height:150px;">
 
-If all the above have been chosen-- lipids, compositions, box size, number-- we
-need to start using Gromacs.
+If all the above have been chosen-- lipids, compositions, box size,
+number-- we need to start using Gromacs.
+
+## Setup lipids-water system
 
 Let's start by making a box and filling it with one of our chosen lipids.
 <pre><code>genbox</code></pre>
@@ -31,10 +33,10 @@ together into a box doesn't work), -o gives the output as a .gro file.
 <br><br>
 
 Now lets setup and run an equilibration to minimise the system's free
-energy. Here, -f is the md file, which tells mdrun what to do, -c is
-input, -p is the topology file, -maxwarn is optional to tell Gromacs that
-we only want a certain number of warnings, and -o is, as usual, our
-output.
+energy. <br><br> Here, -f is the md file, which tells mdrun what to do, -c is
+input, -p is the topology file to be made, -maxwarn is optional to tell
+Gromacs that we only want a certain number of warnings, and -o is, as
+usual, our output.
 <pre><code>grompp
 mdrun
 </code></pre>
@@ -62,11 +64,15 @@ Again, edit the topology file to uncomment water. Now run the equilibration.
 <pre><code>grompp
 mdrun</code></pre>
 
+## Equilibrate lipids-water system
+
 It is now time for us to run the full simulation using our real .mdp file,
 martini_md.mdp. This .mdp file will use XXXX steps of 30 fs to simulate a time
 of 200 ns.
 <pre><code>grompp
 mdrun</code></pre>
+
+## Inspect product
 
 We have now finished what should be our bicelle! To check how this simulation
 went, lets use VMD to visually inspect our product.
