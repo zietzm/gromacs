@@ -61,8 +61,8 @@ input, -p is the topology file to be made, -maxwarn is optional to tell
 Gromacs that we only want a certain number of warnings, and -o is, as
 usual, our output.
 ```
-grompp -minimization.mdp -c lipid1.gro -p lipid.top -maxwarn 10 -o lipid1-min.tpr
-mdrun -deffnm lipid1-min -v - c lipid1-min1.gro
+grompp -f minimization.mdp -c lipid1.gro -p lipid.top -maxwarn 10 -o lipid1-min.tpr
+mdrun -deffnm lipid1-min -v
 ```
 
 That shouldn't have taken long at all. We now move on by adding our other lipid.
@@ -70,7 +70,7 @@ To avoid any complications that arise when we try to merge to output files, we
 will use a trick to "solvate" the output file from our first simulation with our
 chosen second lipid.
 ```
-genbox -cp lipid1-min1.gro -cs dbpc_single.gro -o lipids.gro -maxsol 338
+genbox -cp lipid1-min.gro -cs dbpc_single.gro -o lipids.gro -maxsol 338
 ```
 
 Again, we setup and run a minimisation of the system's free energy. First,
@@ -78,21 +78,21 @@ though, we need to open our topology file, lipid.top and uncomment the lipid
 we just added. You can do this with nano lipid.top or just open it using a text
 editor.
 ```
-grompp -minimization.mdp -c lipids.gro -p lipid.top -maxwarn 10 -o both-min.tpr
-mdrun -deffnm both-min -v -c both-min1.gro
+grompp -f minimization.mdp -c lipids.gro -p lipid.top -maxwarn 10 -o both-min.tpr
+mdrun -deffnm both-min -v
 ```
 
 Now we have an equilibrated system with two types of lipids. To simulate real
 conditions, we will add water to the system. This time, we solvate our last
 output with water.
 ```
-genbox
+genbox -cp both-min.gro -cs water.gro -o water-lipids.gro -maxsol 768 -vdwd 0.21
 ```
 
 Again, edit the topology file to uncomment water. Now run the equilibration.
 ```
-grompp
-mdrun
+grompp -f minimization.mdp -c water-lipids.gro -p lipid.top -maxwarn 10 -o water-lipids-min.tpr
+mdrun -deffnm water-lipids-min -v
 ```
 
 ## Equilibrate lipids-water system
@@ -101,8 +101,8 @@ It is now time for us to run the full simulation using our real .mdp file,
 martini_md.mdp. This .mdp file will use 12,500,000 steps of 20 fs to simulate a time
 of 250 ns.
 ```
-grompp
-mdrun
+grompp -f martini_md.mdp -c water-lipids-min.gro -p lipid.top -maxwarn 10 -o solv-md.tpr
+mdrun -deffnm solv-md -v
 ```
 
 ## Inspect product
@@ -110,7 +110,7 @@ mdrun
 We have now finished what should be our bicelle! To check how this simulation
 went, lets use VMD to visually inspect our product.
 ```
-vmd
+vmd solv-md.gro
 ```
 
 Lets draw the bonds so we can better see what's going on. Open the TK console
