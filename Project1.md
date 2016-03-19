@@ -37,6 +37,40 @@ minimize the system before it is sent to the "production run".
 If all the above have been chosen-- lipids, compositions, box size,
 number-- we need to start using Gromacs.
 
+## Running simulation remotely
+
+Because any complex simulation will require significant computing power and time,
+we do not generally run simulations on personal computers. In fact, simulations
+will be run almost exclusively through remote supercomputers or high-powered
+workstations.
+
+Working remotely has many advantages and is not difficult. Gromacs is
+especially easy to work remotely because the entire program runs in the linux
+terminal. It is for this reason that running simulations remotely is easiest if
+you are working with a linux machine to begin with.
+
+If you are using a linux personal computer (I use Ubuntu):
+1. Open a terminal
+2. Start ssh with the following command, and, when prompted, enter your password.
+```
+~$ ssh USER@ADDRESS
+```
+3. Transfer files to the remote station. If both the local and remote system are
+running linux, we can add our files using Nautilus, the system file manager.
+Simply open Nautilus and login using "Connect to Server". This makes the remote
+computer's file system as accessible as if it were a local storage device. Now
+we simply copy and paste our files to the remote directory.
+4. Go back to terminal and CD into the directory you put the files in step 3.
+5. Make sure tmux is installed so that we don't have to keep our terminal and
+SSH session open during the entire course of the simulation.
+
+If you are using a Windows personal computer:
+
+We will need several tools in order to have as seamless an experience as we would
+on a linux machine. First, we need to download PuTTY-- an SSH client-- and WinSCP,
+a remote file manager that will act as a substitute for Nautilus's built-in
+functionality.
+
 ## Setup lipids-water system
 
 First, open Gromacs. Under my installation we enter:
@@ -97,13 +131,18 @@ mdrun -deffnm water-lipids-min -v
 
 ## Equilibrate lipids-water system
 
-It is now time for us to run the full simulation using our real .mdp file,
-martini_md.mdp. This .mdp file will use 12,500,000 steps of 20 fs to simulate a time
+It is now time for us to run the full simulation using our real .mdp file, martini_md.mdp. This .mdp file will use 12,500,000 steps of 20 fs to simulate a time
 of 250 ns.
 ```
 grompp -f martini_md.mdp -c water-lipids-min.gro -p lipid.top -maxwarn 10 -o solv-md.tpr
+tmux
 mdrun -deffnm solv-md -v
 ```
+Now we wait for the simulation to run. This could take a long time, but
+luckily we ran the process in tmux. This allows us to press Ctr-b d to detach
+from the tmux session. To test that it worked, we can type `tmux attach` to check
+that the process is running even when we close the SSH session. If everything
+worked with tmux, we can again detach from tmux and type `exit` to exit the SSH.
 
 ## Inspect product
 
