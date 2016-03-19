@@ -140,7 +140,7 @@ tmux
 mdrun -deffnm solv-md -v
 ```
 Now we wait for the simulation to run. This could take a long time, but
-luckily we ran the process in tmux. This allows us to press <kbd>Ctrl</kbd>+<kbd>b</kbd>  
+luckily we ran the process in tmux. This allows us to press <kbd>Ctrl</kbd>+<kbd>b</kbd>
 <kbd>d</kbd> to detach from the tmux session. To test that it worked, we can
 type `tmux attach` to check that the process is running even when we close the
 SSH session. If everything worked with tmux, we can again detach from tmux and
