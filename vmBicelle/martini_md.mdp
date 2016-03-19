@@ -1,7 +1,7 @@
 ;
 ; STANDARD MD INPUT OPTIONS FOR MARTINI 2.x
 ; Updated 02 feb 2013 by DdJ
-; Also Updated 18 mar 2016 23:20 by mz 
+; Also Updated 18 mar 2016 23:20 by mz
 ;
 ; for use with GROMACS 4.5/4.6
 ;
@@ -122,13 +122,13 @@ tc-grps                  = DPPC DBPC W
 tau_t                    = 1.0  1.0 1.0 ; Is this the temperature coupling time constant?? -mz
 ref_t                    = 323 323 323  ; Per Jiang, 323K -mz
 Pcoupl                   = berendsen  ; parrinello-rahman ; parrinello-rahman
-Pcoupltype               = isotropic  ; semiisotropic JIANG USED SEMIISOTROPIC PRESSURE COUPLING -mz
-tau_p                    = 3.0        ; 12.0 12.0  ;parrinello-rahman is more stable with larger tau-p, DdJ, 20130422
-compressibility          = 3e-4       ; 3e-4
-ref_p                    = 1.0        ; 1.0 1.0
+Pcoupltype               = semiisotropic  ; semiisotropic means isotropic in x/y directions but different in z. Needs 2 values. -mz
+tau_p                    = 3.0 3.0        ; 12.0 12.0  ;x/y z values 
+compressibility          = 3e-4 0       ; We want no z compressibility
+ref_p                    = 1.0 1.0        ; 1.0 1.0
 
 gen_vel                  = yes
-gen_temp                 = 320
+gen_temp                 = 323
 gen_seed                 = 473529
 
 
