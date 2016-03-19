@@ -1,3 +1,11 @@
+;
+; GENERATE A LIPID BICELLE
+; 19 Mar 2016 by Michael Zietz
+; For documentation and explanation, please see Project1.md
+;
+; To be used with Gromacs 4.65
+;
+
 ; Start Gromacs
 source /usr/local/gromacs/bin/GMXRC
 
