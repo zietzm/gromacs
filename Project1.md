@@ -50,6 +50,7 @@ terminal. It is for this reason that running simulations remotely is easiest if
 you are working with a linux machine to begin with.
 
 If you are using a linux personal computer (I use Ubuntu):
+
 1. Open a terminal
 2. Start ssh with the following command, and, when prompted, enter your password.
 ```
