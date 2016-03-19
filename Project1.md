@@ -30,6 +30,9 @@ forces were treated the same way, but the shift function was, "on between 0.9 nm
 and 1.2 nm." Jiang noted that DPPC behaves like a fluid above 315K, and he
 chose the simulation to take place at 323K.
 
+As in Jiang, we will use the steepest descent algorithm in "minimization.mdp" to
+minimize the system before it is sent to the "production run".
+
 
 If all the above have been chosen-- lipids, compositions, box size,
 number-- we need to start using Gromacs.
@@ -83,7 +86,7 @@ Now we have an equilibrated system with two types of lipids. To simulate real
 conditions, we will add water to the system. This time, we solvate our last
 output with water.
 ```
-genbox 
+genbox
 ```
 
 Again, edit the topology file to uncomment water. Now run the equilibration.
