@@ -21,8 +21,8 @@ title                    = Martini
 
 
 integrator               = md
-dt                       = 0.02
-nsteps                   = 12500000
+dt                       = 0.02 ; 0.02 ps = 20 fs
+nsteps                   = 12500000 ; 12,500,000 * .02 = 250 ns
 nstcomm                  = 100
 comm-grps		 =
 
@@ -91,12 +91,6 @@ vdw_type                 = Shift  ;cutoff (for use with Verlet-pairlist)
 rvdw_switch              = 0.9  ; As listed in Jiang, .9 to 1.2 nm VDW shift
 rvdw                     = 1.2	;1.1 (for use with Verlet-pairlist)
 
-;cutoff-scheme            = verlet
-;coulomb-modifier         = Potential-shift
-;vdw-modifier             = Potential-shift
-;epsilon_rf               = 0   ; epsilon_rf = 0 really means epsilon_rf = infinity
-;verlet-buffer-drift      = 0.005
-
 
 ; MARTINI and TEMPERATURE/PRESSURE
 ; normal temperature and pressure coupling schemes can be used.
@@ -117,14 +111,14 @@ rvdw                     = 1.2	;1.1 (for use with Verlet-pairlist)
 ; Rahman is prone to oscillating behaviour. For bilayer systems the pressure
 ; coupling should be done semiisotropic.
 
-tcoupl                   = v-rescale  ; As listed in Jiang, temperature is coupled separately -mz
+tcoupl                   = berendsen  ; As listed in Jiang, temperature is coupled by berendsen
 tc-grps                  = DPPC DBPC W
-tau_t                    = 1.0  1.0 1.0 ; Is this the temperature coupling time constant?? -mz
-ref_t                    = 323 323 323  ; Per Jiang, 323K -mz
+tau_t                    = 1.0  1.0 1.0 ; temperature coupling time constant
+ref_t                    = 323 323 323  ; Per Jiang, 323K done individually
 Pcoupl                   = berendsen  ; parrinello-rahman ; parrinello-rahman
 Pcoupltype               = semiisotropic  ; semiisotropic means isotropic in x/y directions but different in z. Needs 2 values. -mz
-tau_p                    = 3.0 3.0        ; 12.0 12.0  ;x/y z values 
-compressibility          = 3e-4 0       ; We want no z compressibility
+tau_p                    = 3.0 3.0        ; 12.0 12.0  ;x/y z values
+compressibility          = 5e-5 0       ; We want no z compressibility and 5e-5 x/y
 ref_p                    = 1.0 1.0        ; 1.0 1.0
 
 gen_vel                  = yes
