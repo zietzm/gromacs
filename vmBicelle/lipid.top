@@ -1,4 +1,4 @@
-#include "water.itp"
+#include "martini_v2.1.itp"
 #include "dppc_single.itp"
 #include "dbpc_single.itp"
 
