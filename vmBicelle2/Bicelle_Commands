@@ -14,6 +14,11 @@ genbox -ci dppc_single.gro -nmol 628 -box 23.9 8.1 20.4 -try 500 -o dppcs.gro
 grompp -f minimization.mdp -c dppcs.gro -p lipid.top -maxwarn 10 -o dppc-min.tpr
 mdrun -deffnm dppc-min -v
 
+; Box with second lipid solvating the last output
+genbox -cp dppc-min.gro -cs DTPC.gro -o both.gro -maxsol 338 -try 500
+grompp -f minimization.mdp -c both.gro -p lipid.top -maxwarn 10 -o both-min.tpr
+mdrun -deffnm both-min -v
+
 
 
 ; Laterally replicate bilayer
@@ -25,11 +30,6 @@ mdrun -deffnm dppc-min -v
 ;genbox -cp doubl
 
 
-
-; Box with second lipid solvating the last output
-genbox -cp dxpc-min.gro -cs DTPC.gro -o both.gro -maxsol 338 -try 500
-grompp -f minimization.mdp -c both.gro -p lipid.top -maxwarn 10 -o both-min.tpr
-mdrun -deffnm both-min -v
 
 ; Solvate with water
 genbox -cp both-min.gro -cs water.gro -o water-lipids.gro -maxsol 768 -vdwd 0.21
