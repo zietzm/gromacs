@@ -10,9 +10,21 @@
 source /usr/local/gromacs/bin/GMXRC
 
 ; Box with first lipid
-genbox -ci DXPC.gro -nmol 628 -box 23.9 8.1 20.4 -try 500 -o dxpcs.gro
-grompp -f minimization.mdp -c dxpcs.gro -p lipid.top -maxwarn 10 -o dxpc-min.tpr
-mdrun -deffnm dxpc-min -v
+genbox -ci dppc_single.gro -nmol 628 -box 23.9 8.1 20.4 -try 500 -o dppcs.gro
+grompp -f minimization.mdp -c dppcs.gro -p lipid.top -maxwarn 10 -o dppc-min.tpr
+mdrun -deffnm dppc-min -v
+
+
+
+; Laterally replicate bilayer
+;genconf -f dppc_bilayer.gro -o double_bilayer.gro -nbox 2 2 1
+;grompp -f minimization.mdp -c double_bilayer.gro -p lipid.top -maxwarn 10 -o 1bil.tpr
+;mdrun -deffnm 1bil -v
+
+; Add a number of DBPC (self-made according to Jiang)
+;genbox -cp doubl
+
+
 
 ; Box with second lipid solvating the last output
 genbox -cp dxpc-min.gro -cs DTPC.gro -o both.gro -maxsol 338 -try 500

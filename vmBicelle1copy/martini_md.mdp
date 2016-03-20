@@ -19,9 +19,9 @@ title                    = Martini
 ; than 20 fs are also not required unless specifically stated in the itp file.
 
 
-integrator               = steep ; Run steepest descent energy minimization algorithm
-dt                       = 0.04  
-nsteps                   = 1000  ; Number of steep steps to run
+integrator               = md
+dt                       = 0.03
+nsteps                   = 900000
 nstcomm                  = 100
 comm-grps		 =
 
@@ -29,15 +29,15 @@ comm-grps		 =
 ; OUTPUT CONTROL OPTIONS =
 ; Output frequency for coords (x), velocities (v) and forces (f) =
 
-nstxout                  = 5000
-nstvout                  = 5000
+nstxout                  = 0
+nstvout                  = 0
 nstfout                  = 0
 nstlog                   = 1000  ; Output frequency for energies to log file
 nstenergy                = 100   ; Output frequency for energies to energy file
 nstxtcout                = 1000  ; Output frequency for .xtc file
 xtc_precision            = 100
 xtc-grps                 =
-energygrps               = System
+energygrps               = DHPC DLPC W
 
 
 ; NEIGHBOURLIST and MARTINI
@@ -95,6 +95,40 @@ rvdw                     = 1.2	;1.1 (for use with Verlet-pairlist)
 ;vdw-modifier             = Potential-shift
 ;epsilon_rf               = 0   ; epsilon_rf = 0 really means epsilon_rf = infinity
 ;verlet-buffer-drift      = 0.005
+
+
+; MARTINI and TEMPERATURE/PRESSURE
+; normal temperature and pressure coupling schemes can be used.
+; It is recommended to couple individual groups in your system separately.
+; Good temperature control can be achieved with the velocity rescale (V-rescale)
+; thermostat using a coupling constant of the order of 1 ps. Even better
+; temperature control can be achieved by reducing the temperature coupling
+; constant to 0.1 ps, although with such tight coupling (approaching
+; the time step) one can no longer speak of a weak-coupling scheme.
+; We therefore recommend a coupling time constant of at least 0.5 ps.
+; The Berendsen thermostat is less suited since it does not give
+; a well described thermodynamic ensemble.
+;
+; Pressure can be controlled with the Parrinello-Rahman barostat,
+; with a coupling constant in the range 4-8 ps and typical compressibility
+; in the order of 10-4 - 10-5 bar-1. Note that, for equilibration purposes,
+; the Berendsen barostat probably gives better results, as the Parrinello-
+; Rahman is prone to oscillating behaviour. For bilayer systems the pressure
+; coupling should be done semiisotropic.
+
+tcoupl                   = v-rescale
+tc-grps                  = DHPC DLPC W
+tau_t                    = 1.0  1.0 1.0
+ref_t                    = 323 323 323
+Pcoupl                   = berendsen  ; parrinello-rahman ; parrinello-rahman
+Pcoupltype               = isotropic  ; semiisotropic
+tau_p                    = 3.0        ; 12.0 12.0  ;parrinello-rahman is more stable with larger tau-p, DdJ, 20130422
+compressibility          = 3e-4       ; 3e-4
+ref_p                    = 1.0        ; 1.0 1.0
+
+gen_vel                  = yes
+gen_temp                 = 320
+gen_seed                 = 473529
 
 
 ; MARTINI and CONSTRAINTS

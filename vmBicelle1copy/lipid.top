@@ -2,9 +2,9 @@
 #include "martini_v2.0_lipids.itp"
 
 [ system ]
-MIXED-LIPID BICELLE SELF-ASSEMBLY
+MIXED BILAYER SELF-ASSEMBLY
 
 [ molecules ]
-DPPC 628
-;W 8000
-;DBPC 338
+DHPC 338
+DLPC 628
+;W 768
