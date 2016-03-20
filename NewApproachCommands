@@ -1,0 +1,28 @@
+;
+; New Approach
+;
+
+; Minimize Martini's 128 lipid bilayer
+grompp -f minimization1.mdp -c dppc_bilayer.gro -p lipid1.top -maxwarn 10 -o dppc_bilayer_min.tpr
+mdrun -deffnm dppc_bilayer_min -v
+
+; bilayer replication. We had to remove water here first from dppc_bilayer_min.gro to produce min1
+genconf -f dppc_bilayer_min1.gro -o box1.gro -nbox 2 2 1
+
+; Minimization
+grompp -f minimization1.mdp -c box1.gro -p lipid1.top -maxwarn 10 -o box1min.tpr
+mdrun -deffnm box1min -v
+
+; Solvate with water
+genbox -cp box1min.gro -cs water.gro -o box2.gro -maxsol 8000 -vdwd 0.21
+
+; Minimization
+grompp -f minimization1.mdp -c box2.gro -p lipid1.top -maxwarn 10 -o box2min.tpr
+mdrun -deffnm box2min -v
+
+; Somehow convert a certain number of DPPC to DBPC ?method unclear? Surely not manually...
+
+; Box with DBPC lipid
+genbox -ci dbpc_single.gro -nmol 84 -box 23.9 8.1 20.4 -try 500 -o DBPC.gro
+grompp -f minimization.mdp -c DBPC.gro -p dbpc.top -maxwarn 10 -o dxpc-min.tpr
+mdrun -deffnm dxpc-min -v
