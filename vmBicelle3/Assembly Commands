@@ -15,10 +15,13 @@ grompp -f minimization.mdp -c both.gro -p topol.top -maxwarn 10 -o lipids_min.tp
 mdrun -deffnm lipids_min -v
 
 ; Solvate with water
-genbox -cs water.gro -cp lipids_min.gro -o all.gro -maxsol 10000 -vdwd 0.21
+genbox -cs water.gro -cp lipids_min.gro -o all.gro -maxsol 20000 -vdwd 0.21
 grompp -f minimization.mdp -c all.gro -p topol.top -maxwarn 10 -o all_min.tpr
 mdrun -deffnm all_min -v
 
 ; Minimize the box
 grompp -f martini_md.mdp -c all_min.gro -p topol.top -maxwarn 10 -o minim.tpr
 mdrun -deffnm minim -v
+
+; Compute densities across the box
+g_density -f minim.gro -s minim.tpr -o density.xvg
