@@ -20,6 +20,14 @@ genbox -cp box1min.gro -cs water.gro -o box2.gro -maxsol 8000 -vdwd 0.21
 grompp -f minimization1.mdp -c box2.gro -p lipid1.top -maxwarn 10 -o box2min.tpr
 mdrun -deffnm box2min -v
 
+; Minimize ALL.GRO
+grompp -f minimization1.mdp -c all.gro -p lipid1.top -maxwarn 10 -o all1.tpr
+mdrun -deffnm all1 -v
+grompp -f martini_md.mdp -c all1.gro -p lipid1.top -maxwarn 10 -o all2.trp
+mdrun -deffnm all3 -v
+
+
+
 ; Somehow convert a certain number of DPPC to DBPC ?method unclear? Surely not manually...
 
 ; Box with DBPC lipid
