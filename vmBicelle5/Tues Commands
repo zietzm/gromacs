@@ -1,0 +1,33 @@
+;;;
+;;;
+;;;
+source /usr/local/gromacs/bin/GMXRC
+
+; Just to be safe, minimize the box
+grompp -f minimization.mdp -c dppc_bilayer.gro -p topol.top -maxwarn 10 -o bilayer_min.tpr
+mdrun -deffnm bilayer_min -v
+
+; Remove waters and edit topology (nowater_bilayer_min.gro)
+
+; Replicate the box
+genconf -f nowater_bilayer_min.gro -o bilayer1.gro -nbox 3 3 1
+
+; Edit topology
+
+; Solvate
+genbox -cp -cs water.gro -o -maxsol 18000 -vdwd 0.21
+
+; Edit topology
+
+; Minimization
+grompp -f minimization.mdp -c bilayer1.gro -p topol.top -maxwarn 10 -o bilayer1_min.tpr
+mdrun -deffnm bilayer1_min -v
+
+; Increase box size
+genbox
+grompp -f minimization.mdp -c -p topol.top -maxwarn 10 -o
+mdrun -deffnm -v
+
+; Production run
+grompp -f martini_md.mdp -c -p topol.top -maxwarn 10 -o
+mdrun -deffnm -v
