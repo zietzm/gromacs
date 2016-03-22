@@ -10,23 +10,26 @@ mdrun -deffnm bilayer_min -v
 ; Remove waters and edit topology (nowater_bilayer_min.gro)
 
 ; Replicate the box
-genconf -f nowater_bilayer_min.gro -o bilayer1.gro -nbox 3 3 1
+genconf -f nowater_bilayer_min.gro -o bilayer1.gro -nbox 3 3 1 -o bilayer1.gro
 
 ; Edit topology
 
 ; Solvate
-genbox -cp -cs water.gro -o -maxsol 18000 -vdwd 0.21
+genbox -cp bilayer1.gro -cs water.gro -o bilayer_solv.gro -maxsol 18000 -vdwd 0.21
 
 ; Edit topology
 
 ; Minimization
-grompp -f minimization.mdp -c bilayer1.gro -p topol.top -maxwarn 10 -o bilayer1_min.tpr
-mdrun -deffnm bilayer1_min -v
+grompp -f minimization.mdp -c bilayer_solv.gro -p topol.top -maxwarn 10 -o bilayer_solv_min.tpr
+mdrun -deffnm bilayer_solv_min -v
 
-; Increase box size
-genbox
-grompp -f minimization.mdp -c -p topol.top -maxwarn 10 -o
-mdrun -deffnm -v
+; Remove water and edit topology (nowaterBBilayer.gro)
+
+; Increase box size (CAN BE DONE MANUALLY...nowaterBilayerBox.gro BUT SOLVATE BEFORE MINIMIZING!!)
+
+genbox -cp nowaterBilayerBox.gro -ci water.gro -nmol 18000 -try 500 -o waterBilayerBox.gro
+grompp -f minimization.mdp -c nowaterBilayerBox.gro -p topol.top -maxwarn 10 -o nowater_min.tpr
+mdrun -deffnm nowater_min -v
 
 ; Production run
 grompp -f martini_md.mdp -c -p topol.top -maxwarn 10 -o
