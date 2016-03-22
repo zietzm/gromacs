@@ -1,0 +1,14 @@
+Lab to-do's
+
+1. Highlight relevant dissertation passages and email to Tobias
+2. Learn Python
+  Do I need https://pypi.python.org/pypi/MDAnalysis? numpy 
+3. Run the following simulation:
+  Start with DPPC bilayer
+  Edit some manually to be DBPC + W
+  Replicate the new bilayer
+  Put replicated bilayer into a larger box
+  Solvate with solvent amounts of water
+  Run martini_md.mdp full simulation
+4. Look into XSEDE and how to get computing time / get a certificate for myself
+5.
