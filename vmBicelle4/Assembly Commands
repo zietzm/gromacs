@@ -22,6 +22,11 @@ mdrun -deffnm all_min -v
 ; Minimize the box
 grompp -f martini_md.mdp -c all_min.gro -p topol.top -maxwarn 10 -o minim.tpr
 mdrun -deffnm minim -v
+grompp -f finish_martini_md.mdp -c minim.gro -p topol.top -maxwarn 10 -o 2minim.tpr
+mdrun -deffnm 2minim -v
+
+; FIX MOLECULES BROKEN ACROSS PERIODIC BOUNDARY CONDITIONS
+trjconv -f minim.xtc -o trajfixed.xtc -s minim.tpr -pbc mol
 
 ; Compute densities across the box
 g_density -f minim.gro -s minim.tpr -o density.xvg
