@@ -31,7 +31,12 @@ mdrun -deffnm Mixed5_min -v -nt 1
 grompp -f martini_md.mdp -c Mixed5_min.gro -p topol.top -maxwarn 10 -o Mixed5_Martini.tpr
 mdrun -deffnm Mixed5_Martini -v
 
+; Compute densities across the box
+g_density -f Mixed5_Martini.gro -s Mixed5_Martini.tpr -o Mixed5_martini_Density.xvg
 
+; Extend run a bit
+grompp -f martini_md1.mdp -c Mixed5_Martini.gro -p topol.top -maxwarn 10 -o Mixed5_Martini2.tpr
+mdrun -deffnm Mixed5_Martini2 -v
 
 ;;; Solvate CURRENT
 ;;; genbox -cp Mixed3.gro -cs water.gro -o Mixed4.gro -maxsol 18000 -vdwd 0.21
