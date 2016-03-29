@@ -3,18 +3,15 @@ Lab to-do's
 1. Learn Python
   Do I need https://pypi.python.org/pypi/MDAnalysis? numpy
 2. Look into XSEDE and how to get computing time / get a certificate for myself
-3. Start with R Markdown self-instruction.
-    Or wait until Stat 405
-4.
-5.
+3. Read literature
 
 
-Highlight relevant dissertation passages and email to Tobias. DONE
-Run the following simulation:
-  Start with DPPC bilayer
-  Edit some manually to be DBPC + W
-  Replicate the new bilayer
-  Put replicated bilayer into a larger box
-  Solvate with solvent amounts of water
-  Run martini_md.mdp full simulation
-  Change 45 DPP to DBP
+# 5. Change 45 DPP to DBP DONE
+# 3. Run the following simulation: DONE
+#  Start with DPPC bilayer
+#  Edit some manually to be DBPC + W
+#  Replicate the new bilayer
+#  Put replicated bilayer into a larger box
+#  Solvate with solvent amounts of water
+#  Run martini_md.mdp full simulation
+#  1. Highlight relevant dissertation passages and email to Tobias. DONE
