@@ -115,7 +115,7 @@ our initial DPPC/DBPC mixture ratio.
 
 Just to be safe, minimize the box
 ```
-genbox -cp Out.gro -cs water.gro -o Out1.gro -maxsol 2000 -vdwd 0.21
+;genbox -cp Out.gro -cs water.gro -o Out1.gro -maxsol 2000 -vdwd 0.21 ;Only if W was removed.
 grompp -f minimization.mdp -c Out1.gro -p topol.top -maxwarn 10 -o Out1_min.tpr
 mdrun -deffnm Out1_min -v
 ```
