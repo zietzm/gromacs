@@ -18,7 +18,7 @@ the bilayer, and energy minimize the system.
 
 ## Generating Mixed bilayer
 We use a Python script to edit a desired number of DPPC lipids into DBPC.
-```
+```python
 import numpy as np
 import csv
 
