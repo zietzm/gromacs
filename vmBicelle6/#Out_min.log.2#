@@ -1,5 +1,5 @@
-Log file opened on Wed Apr  6 19:02:03 2016
-Host: michael-desktop  pid: 1928  nodeid: 0  nnodes:  1
+Log file opened on Wed Apr  6 17:21:17 2016
+Host: michael-desktop  pid: 32500  nodeid: 0  nnodes:  1
 Gromacs version:    VERSION 4.6.5
 Precision:          single
 Memory model:       64 bit
@@ -24,7 +24,7 @@ C compiler flags:   -msse2    -Wextra -Wno-missing-field-initializers -Wno-sign-
 
                          :-)  G  R  O  M  A  C  S  (-:
 
-               GRoups of Organic Molecules in ACtion for Science
+                  Green Red Orange Magenta Azure Cyan Skyblue
 
                             :-)  VERSION 4.6.5  (-:
 
@@ -269,7 +269,7 @@ Max number of connections per atom is 8
 Total number of connections is 5472
 Max number of graph edges per atom is 3
 Total number of graph edges is 2276
-Started Steepest Descents on node 0 Wed Apr  6 19:02:03 2016
+Started Steepest Descents on node 0 Wed Apr  6 17:21:17 2016
 
 Steepest Descents:
    Tolerance (Fmax)   =  1.00000e+01
@@ -8079,15 +8079,15 @@ Norm of force     =  1.4876249e+01
 
  Computing:         Nodes   Th.     Count  Wall t (s)     G-Cycles       %
 -----------------------------------------------------------------------------
- Neighbor search        1    1       1001       6.578       35.684    39.6
- Force                  1    1       1001       1.627        8.825     9.8
- Rest                   1                       8.388       45.500    50.6
+ Neighbor search        1    1       1001       7.139       38.727    39.4
+ Force                  1    1       1001       1.802        9.776     9.9
+ Rest                   1                       9.191       49.859    50.7
 -----------------------------------------------------------------------------
- Total                  1                      16.592       90.008   100.0
+ Total                  1                      18.132       98.362   100.0
 -----------------------------------------------------------------------------
 
                Core t (s)   Wall t (s)        (%)
-       Time:       16.599       16.592      100.0
+       Time:       18.124       18.132      100.0
                (steps/hour)
-Performance:       217184.1
-Finished mdrun on node 0 Wed Apr  6 19:02:19 2016
+Performance:       198738.3
+Finished mdrun on node 0 Wed Apr  6 17:21:35 2016

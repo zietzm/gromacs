@@ -16,4 +16,10 @@ commands, there is no need to even put semicolons at the end of text. If we
 want to print output as well, however, we need to use `echo "TEXT";` to print
 our desired "TEXT". Once we have finished writing all the commands that will
 run automatically, simply press ESCAPE, followed by `:w` followed by `:x` to
-save our work and close VIM. 
+save our work and close VIM.
+
+To run a shell script, simply run the following:
+```
+chmod +x FILENAME.sh
+./FILENAME.sh
+```

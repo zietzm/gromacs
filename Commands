@@ -1,10 +1,16 @@
 source /usr/local/gromacs/bin/GMXRC
-;editconf -f dppc_bilayer.gro -o dppc_bilayer.pdb
-python Composition_Change.py
-editconf -f Out.pdb -o Out.gro
-grompp -f minimization.mdp -c Out.gro -p topol.top -maxwarn 10 -o Out_min.tpr
-mdrun -deffnm Out_min -v -nt 1
-genconf -f Out_min.gro -o Out1.gro -nbox 3 3 1
+
+;;;editconf -f dppc_bilayer.gro -o dppc_bilayer.pdb
+;;;python Composition_Change.py
+;;;editconf -f Out.pdb -o MixedBilayer.gro
+
+grompp -f minimization.mdp -c MixedBilayer.gro -p topol.top -maxwarn 10 -o MB_min.tpr
+mdrun -deffnm MB_min -v -nt 1
+
+editconf -f MB_min.gro -o MB_min.pdb
+
+;; REMOVE WATER HERE
+genconf -f nowater_MB_min.gro -o Out1.gro -nbox 3 3 1
 
 ;De Solvate
 genbox -cp Out3.gro -cs water.gro -maxsol 18000 -vdwd 0.21 -o Out4.gro
