@@ -1,0 +1,11 @@
+#include "martini_v2.1.itp"
+#include "dppc_single.itp"
+#include "dbpc_single.itp"
+
+[ system ]
+LIPID BICELLE SELF-ASSEMBLY
+
+[ molecules ]
+DPPC 747
+DBPC 405
+W 20000

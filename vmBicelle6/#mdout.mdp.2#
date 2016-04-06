@@ -2,7 +2,7 @@
 ;	File 'mdout.mdp' was generated
 ;	By user: michael (1000)
 ;	On host: michael-desktop
-;	At date: Wed Apr  6 17:47:18 2016
+;	At date: Wed Apr  6 17:43:02 2016
 ;
 
 ; VARIOUS PREPROCESSING OPTIONS
@@ -13,11 +13,11 @@ include                  =
 define                   = 
 
 ; RUN CONTROL PARAMETERS
-integrator               = md
+integrator               = steep
 ; Start time and timestep in ps
 tinit                    = 0
-dt                       = 0.02
-nsteps                   = 12500000
+dt                       = 0.04
+nsteps                   = 1000
 ; For exact run continuation or redoing part of a run
 init-step                = 0
 ; Part index is updated automatically on checkpointing (keeps files separate)
@@ -51,8 +51,8 @@ rtpi                     = 0.05
 
 ; OUTPUT CONTROL OPTIONS
 ; Output frequency for coords (x), velocities (v) and forces (f)
-nstxout                  = 0
-nstvout                  = 0
+nstxout                  = 5000
+nstvout                  = 5000
 nstfout                  = 0
 ; Output frequency for energies to log file and energy file
 nstlog                   = 1000
@@ -65,7 +65,7 @@ xtc_precision            = 100
 ; select multiple groups. By default all atoms will be written.
 xtc-grps                 = 
 ; Selection of energy groups
-energygrps               = DPPC DBPC W
+energygrps               = System
 
 ; NEIGHBORSEARCHING PARAMETERS
 ; cut-off scheme (group: using charge groups, Verlet: particle based cut-offs)
@@ -147,23 +147,23 @@ sa-surface-tension       = -1
 
 ; OPTIONS FOR WEAK COUPLING ALGORITHMS
 ; Temperature coupling  
-tcoupl                   = berendsen
+tcoupl                   = No
 nsttcouple               = -1
 nh-chain-length          = 10
 print-nose-hoover-chain-variables = no
 ; Groups to couple separately
-tc-grps                  = DPPC DBPC W
+tc-grps                  = 
 ; Time constant (ps) and reference temperature (K)
-tau_t                    = 1.0  1.0 1.0
-ref_t                    = 323 323 323
+tau-t                    = 
+ref-t                    = 
 ; pressure coupling     
-Pcoupl                   = berendsen
-Pcoupltype               = semiisotropic
+pcoupl                   = No
+pcoupltype               = Isotropic
 nstpcouple               = -1
 ; Time constant (ps), compressibility (1/bar) and reference P (bar)
-tau_p                    = 3.0 3.0
-compressibility          = 5e-5 0
-ref_p                    = 1.0 1.0
+tau-p                    = 1
+compressibility          = 
+ref-p                    = 
 ; Scaling of reference coordinates, No, All or COM
 refcoord-scaling         = No
 
@@ -206,9 +206,9 @@ annealing-time           =
 annealing-temp           = 
 
 ; GENERATE VELOCITIES FOR STARTUP RUN
-gen_vel                  = yes
-gen_temp                 = 323
-gen_seed                 = 473529
+gen-vel                  = no
+gen-temp                 = 300
+gen-seed                 = 173529
 
 ; OPTIONS FOR BONDS    
 constraints              = none
