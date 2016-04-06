@@ -1,21 +1,15 @@
 source /usr/local/gromacs/bin/GMXRC
+;editconf -f dppc_bilayer.gro -o dppc_bilayer.pdb
 
-;;;editconf -f dppc_bilayer.gro -o dppc_bilayer.pdb
-;;;python Composition_Change.py
-;;;editconf -f Out.pdb -o MixedBilayer.gro
-
-grompp -f minimization.mdp -c MixedBilayer.gro -p topol.top -maxwarn 10 -o MB_min.tpr
-mdrun -deffnm MB_min -v -nt 1
-
-editconf -f MB_min.gro -o MB_min.pdb
-
-;; REMOVE WATER HERE
-genconf -f nowater_MB_min.gro -o Out1.gro -nbox 3 3 1
-
-;De Solvate
-genbox -cp Out3.gro -cs water.gro -maxsol 18000 -vdwd 0.21 -o Out4.gro
-
-grompp -f minimization.mdp -c Out5.gro -p topol.top -maxwarn 10 -o Out5_min.tpr
-mdrun -deffnm Out5_min -v -nt 1
-grompp -f martini_md.mdp -c Out5_min.gro -p topol.top -maxwarn 10 -o Out5_Martini.tpr
-mdrun -deffnm Out5_Martini -v
+python Composition_Change.py
+editconf -f Out.pdb -o Out.gro
+grompp -f minimization.mdp -c Out.gro -p topol.top -maxwarn 10 -o Out_min.tpr
+mdrun -deffnm Out_min -v -nt 1
+;;;REMOVE WATER -o Out1.gro
+genconf -f Out_nowater.gro -o Out1.gro -nbox 3 3 1
+;edit box size 23.90000  20.40000  8.10000 call it Out2.gro
+genbox -cp Out2.gro -cs water.gro -maxsol 20000 -vdwd 0.21 -o Out3.gro ;from 18000 to 20000 W
+grompp -f minimization.mdp -c Out3.gro -p 9x9topol.top -maxwarn 10 -o Out3_min.tpr
+mdrun -deffnm Out3_min -v -nt 2
+grompp -f martini_md.mdp -c Out3_min.gro -p 9x9topol.top -maxwarn 10 -o Out3_Martini.tpr
+mdrun -deffnm Out3_Martini -v
