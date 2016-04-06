@@ -1,4 +1,4 @@
-# Lipid Bicelle Simulation
+# Lipid Bicelle Simulationer
 
 We are trying to generate a bicelle using Gromacs. Because a large number of
 lipids are required, computational time becomes arbitrarily large. To fix this
