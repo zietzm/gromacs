@@ -5,7 +5,7 @@ import csv
 # number_to_be_converted = 45
 infile = 'MB_min.csv'
 outpdb = 'nowater_MB_min.pdb'
-outtop = 'topol.top'
+outtop = 'topol0.top'
 
 data = np.genfromtxt(infile, delimiter=",", dtype=None)
 ldat = data.size
@@ -76,5 +76,5 @@ top.write('#include "martini_v2.1.itp"'+ '\n'
           '[ molecules ]'+'\n'
           'DPPC %s' % ndp +'\n'
           'DBPC %s' % ndb +'\n'
-          comm + 'W %s' % nwat +'\n')
+          '%sW %s' % (comm, nwat) +'\n')
 top.close()
