@@ -11,6 +11,7 @@ InitGRO=dppc_bilayer.gro
 InitPDB=dppc_bilayer.pdb
 InitCSV=dppc_bilayer.csv
 NewCompPDB=Out.pdb
+NewCompCSV=Out.csv
 NewCompTOP=topol.top
 MixMinGRO=MB_min.gro
 MixMinPDB=MB_min.pdb
@@ -30,7 +31,8 @@ editconf -f dppc_bilayer.gro -o dppc_bilayer.pdb
 python PDB_to_CSV.py $InitPDB $InitCSV
 
 #Change composition, change csv to pdb to gro and output top
-python Composition_Change.py $InitCSV $NewCompPDB $NewCompTOP
+python Composition_Change.py $InitCSV $NewCompPDB $NewCompCSV
+python TopologyBuilder.py $NewCompCSV $NewCompTOP
 editconf -f Out.pdb -o MixedBilayer.gro
 
 #PRELIMINARY MINIMIZATION

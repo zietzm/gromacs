@@ -1,11 +1,10 @@
 import numpy as np
-import csv
 import sys
 
 
 infile = sys.argv[1]
 outpdb = sys.argv[2]
-outtop = sys.argv[3]
+outcsv = sys.argv[3]
 
 # infile = 'dppc_bilayer.csv'
 # outpdb = 'Out.pdb'
@@ -45,7 +44,7 @@ ann=("TITLE     MIXED BILAYER" + '\n'
 fmt="%0s%7s%5s%4s%6s%12s%8s%8s%6s%6s" # Print the tuples to be exactly spaced as pdb.
 x=''
 for i in range(0,ldat):
-   x = x + (fmt % (tuple(data[i]))) + '\n' #format data as it should be for PDB
+    x = x + (fmt % (tuple(data[i]))) + '\n' #format data as it should be for PDB
 
 conc = ("TER"+'\n'
 	"ENDMDL")
@@ -55,3 +54,15 @@ out.write(ann)
 out.write(x)
 out.write(conc)
 out.close()
+
+#Output as CSV as well so that we can generate a topology
+fmt="%0s%0s%0s%0s%0s%0s%0s%0s%0s%0s"
+y=''
+for i in range(0,ldat):
+   y = y + (fmt % (tuple(data[i]))) + '\n'
+
+out2 = open(outcsv,'w')
+out2.write(y)
+out2.close()
+
+
