@@ -46,7 +46,7 @@ editconf -f nowater_MB_min.pdb -o nowater_MB_min.gro
 #Replicate the bilayer
 genconf -f nowater_MB_min.gro -o nowaterReplicated.gro -nbox 3 3 1
 
-#Change box size [MAKE A NEW PYTHON FILE]
+#Change box size
 python ChangeBox.py $BigNoWGRO $BoxNoWGRO
 
 #Solvate

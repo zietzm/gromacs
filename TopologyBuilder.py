@@ -28,6 +28,11 @@ ndp = str(counter1/12) # Account for the number of beads in each molecule.
 ndb = str(counter2/6)
 nwat = str(counter3)
 
+#Comment out water if there isn't any.
+comm = ''
+if counter3 == 0:
+    comm = comm + ';'
+
 top = open(outtop, 'w')
 top.write('#include "martini_v2.1.itp"'+ '\n'
            '#include "dppc_single.itp"'+'\n'
@@ -39,5 +44,5 @@ top.write('#include "martini_v2.1.itp"'+ '\n'
           '[ molecules ]'+'\n'
           'DPPC %s' % ndp +'\n'
           'DBPC %s' % ndb +'\n'
-          'W %s' % nwat +'\n')
+          '%sW %s' % (comm, nwat) +'\n')
 top.close()
