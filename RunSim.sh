@@ -1,8 +1,8 @@
 #!/bin/bash
 
 ### LIPID BICELLE ASSEMBLY
-### BY MICHAEL ZIETZ
-### COMPLETED 07 APR 2016
+### 
+### LAST UPDATED 07 APR 2016
 
 ### REQUIRED FILES:
 # dppc_bilayer.gro (FROM MARTINI WEB)
@@ -19,7 +19,7 @@
 # martini_v2.1.itp
 
 clear
-echo "Running Michael Zietz's Gromacs Simulation";
+echo "Running Gromacs Simulation";
 
 # cd vmBicelle6
 
