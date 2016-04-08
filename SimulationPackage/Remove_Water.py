@@ -9,7 +9,7 @@ outpdb = sys.argv[2]
 
 data = np.genfromtxt(infile, delimiter=",", dtype=None)
 ldat = data.size
-   
+
 #Count number of water
 counter = 0
 for m in range(0,ldat):
@@ -25,7 +25,7 @@ while (int(data.size) > 1536):
 ldat = data.size # Update the number of atoms to reflect edits made.
 
 # Print Output in PDB format. We could edit title, box size, etc.
-ann=("TITLE     WATERLESS MIXED BILAYER" + '\n'
+ann=("TITLE     MIXED BILAYER" + '\n'
      "REMARK    THIS IS A SIMULATION BOX" +'\n'
      "CRYST1   63.191   64.610  100.548  90.00  90.00  90.00 P 1           1" +'\n'
      "MODEL        1" +'\n')

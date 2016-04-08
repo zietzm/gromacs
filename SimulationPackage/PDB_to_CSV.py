@@ -19,7 +19,7 @@ data = file.read()
 # to store all these values and print them directly back into the final output file.
 
 b = ["TER","ENDMDL","TITLE     MIXED BILAYER","TITLE     DPPC BILAYER",
-     "REMARK    THIS IS A SIMULATION BOX",
+     "REMARK    THIS IS A SIMULATION BOX","TITLE     DPPC BILAYER",
      "CRYST1   63.191   64.610  100.548  90.00  90.00  90.00 P 1           1",
      "MODEL        1"]
 

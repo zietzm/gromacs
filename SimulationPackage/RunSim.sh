@@ -66,7 +66,7 @@ mdrun -deffnm $MixMin -v -nt 1
 #Remove water and output the new top gro pdb csv files
 editconf -f $MixMinGRO -o $MixMinPDB
 python PDB_to_CSV.py $MixMinPDB $MixMinCSV
-python Remove_Water.py $MixMinCSV $MixNoWPDB #### ERROR HERE IN PY
+python Remove_Water.py $MixMinCSV $MixNoWPDB
 editconf -f $MixNoWPDB -o $MixNoWGRO
 
 #Replicate the bilayer
@@ -87,11 +87,7 @@ python TopologyBuilder.py $SolvMBCSV $SolvMBTOP
 grompp -f minimization.mdp -c $SolvMBGRO -p $SolvMBTOP -maxwarn 10 -o $SolvMinTPR
 mdrun -deffnm SolvMin -v -nt 1
 
-#SYSTEM IS BLOWING UP BECAUSE ENERGIES TOO HIGH. NEED MORE PRELIM. MINIMIZATION
-grompp -f minimization.mdp -c SolvMin.gro -p topol2.top -maxwarn 10 -o SolvMin2.tpr
-mdrun -deffnm SolvMin2 -v
-
 # Production Run
-grompp -f martini_md.mdp -c Solv2Min.gro -p topol2.top -maxwarn 10 -o SolvMB_Martini.tpr
-tmux new-session -d -s martini_run 'mdrun -deffnm SolvMB_Martini -v'
+grompp -f martini_md.mdp -c SolvMin.gro -p $SolvMBTOP -maxwarn 10 -o SolvMB_Martini.tpr
+tmux new-session -d -s Production_Martini_Run 'mdrun -deffnm SolvMB_Martini -v'
 tmux detach -s Production_Martini_Run

@@ -1,7 +1,13 @@
-
 #!/bin/bash
-ip=dppc_bilayer.csv
-op=OutTest.pdb
-oc=OutTest.csv
 
-python Composition_Change.py $ip $op $oc
+# ip=dppc_bilayer.csv
+# op=dppc_bilayer.pdb
+# oc=OutTest.csv
+# og=test123.gro
+#
+# source /usr/local/gromacs/bin/GMXRC
+
+tmux new-session -d -s my_session 'cmatrix'
+tmux detach -s my_session
+
+#tmux kill-session -t my_session
