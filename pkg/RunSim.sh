@@ -1,8 +1,9 @@
+
 #!/bin/bash
 
 ### LIPID BICELLE ASSEMBLY
 ### 
-### LAST UPDATED 07 APR 2016
+### LAST UPDATED 09 APR 2016
 
 ### REQUIRED FILES:
 # dppc_bilayer.gro (FROM MARTINI WEB)
@@ -46,7 +47,15 @@ SolvMBGRO=SolvMB.gro
 SolvMBPDB=SolvMB.pdb
 SolvMBCSV=SolvMB.csv
 SolvMBTOP=topol2.top
+SolvMin=SolvMin
+SolvMinGRO=SolvMin.gro
 SolvMinTPR=SolvMin.tpr
+SolvMin2TPR=SolvMin2.tpr
+SolvMin2=SolvMin2
+SolvMin2GRO=SolvMin2.gro
+SolvMartiniTPR=SolvMartini.tpr
+SolvMartini=SolvMartini3
+
 
 source /usr/local/gromacs/bin/GMXRC
 
@@ -85,13 +94,13 @@ python TopologyBuilder.py $SolvMBCSV $SolvMBTOP
 
 #Minimize
 grompp -f minimization.mdp -c $SolvMBGRO -p $SolvMBTOP -maxwarn 10 -o $SolvMinTPR
-mdrun -deffnm SolvMin -v -nt 1
+mdrun -deffnm $SolvMin -v -nt 1
 
 #SYSTEM IS BLOWING UP BECAUSE ENERGIES TOO HIGH. NEED MORE PRELIM. MINIMIZATION
-grompp -f minimization.mdp -c SolvMin.gro -p topol2.top -maxwarn 10 -o SolvMin2.tpr
-mdrun -deffnm SolvMin2 -v
+grompp -f MINIM.mdp -c $SolvMinGRO -p $SolvMBTOP -maxwarn 10 -o $SolvMin2TPR
+mdrun -deffnm $SolvMin2 -v
 
 # Production Run
-grompp -f martini_md.mdp -c Solv2Min.gro -p topol2.top -maxwarn 10 -o SolvMB_Martini.tpr
-tmux new-session -d -s martini_run 'mdrun -deffnm SolvMB_Martini -v'
-tmux detach -s Production_Martini_Run
+grompp -f martini_md.mdp -c $Solv2MinGRO -p $SolvMBTOP -maxwarn 10 -o $SolvMartiniTPR
+tmux new-session -d -s martini_run 'mdrun -deffnm SolvMartini -v'
+tmux detach -s martini_run
