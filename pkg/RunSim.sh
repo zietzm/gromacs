@@ -2,7 +2,7 @@
 #!/bin/bash
 
 ### LIPID BICELLE ASSEMBLY
-### 
+###
 ### LAST UPDATED 09 APR 2016
 
 ### REQUIRED FILES:
@@ -85,7 +85,7 @@ genconf -f $MixNoWGRO -o $BigNoWGRO -nbox 3 3 1
 python ChangeBox.py $BigNoWGRO $BoxNoWGRO
 
 #Solvate
-genbox -cp $BoxNoWGRO -cs water.gro -maxsol 20000 -vdwd 0.21 -o $SolvMBGRO
+genbox -cp $BoxNoWGRO -cs water.gro -maxsol 31000 -vdwd 0.21 -o $SolvMBGRO
 
 #Generate new topology
 editconf -f $SolvMBGRO -o $SolvMBPDB

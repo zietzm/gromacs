@@ -9,7 +9,7 @@ outfile = sys.argv[2]
 file=open(infile)
 data=file.read()
 
-data = data.replace("6.31910   6.46100  10.05480","23.90000   20.40000  8.10000")
+data = data.replace("18.95730  19.38300  10.05480","25.00000   25.00000  10.00000")
 
 out = open(outfile,'w') # Create an output file and print data
 out.write(data)
