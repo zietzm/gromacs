@@ -18,9 +18,14 @@ data = file.read()
 # headers, etc. for now. But note that if we want to combine code, it would be good
 # to store all these values and print them directly back into the final output file.
 
-b = ["TER","ENDMDL","TITLE     MIXED BILAYER","TITLE     DPPC BILAYER",
+b = ["ENDMDL","TITLE     MIXED BILAYER","TITLE     DPPC BILAYER",
      "REMARK    THIS IS A SIMULATION BOX",
      "CRYST1   63.191   64.610  100.548  90.00  90.00  90.00 P 1           1",
+     "TITLE     WATERLESS MIXED BILAYER",
+     "TITLE     WATERLESS MIXED BILAYER",
+     "TITLE     WALESS MIXED BILAYER",
+     "TER", #Removed TER from WATERLESS so we need WALESS. 
+     "CRYST1  250.000  250.000  100.000  90.00  90.00  90.00 P 1           1",
      "MODEL        1"]
 
 for i in range(0,len(b)):

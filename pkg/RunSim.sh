@@ -97,10 +97,10 @@ grompp -f minimization.mdp -c $SolvMBGRO -p $SolvMBTOP -maxwarn 10 -o $SolvMinTP
 mdrun -deffnm $SolvMin -v -nt 1
 
 #SYSTEM IS BLOWING UP BECAUSE ENERGIES TOO HIGH. NEED MORE PRELIM. MINIMIZATION
-grompp -f MINIM.mdp -c $SolvMinGRO -p $SolvMBTOP -maxwarn 10 -o $SolvMin2TPR
-mdrun -deffnm $SolvMin2 -v
+# grompp -f MINIM.mdp -c $SolvMinGRO -p $SolvMBTOP -maxwarn 10 -o $SolvMin2TPR
+# mdrun -deffnm $SolvMin2 -v
 
 # Production Run
-grompp -f martini_md.mdp -c $Solv2MinGRO -p $SolvMBTOP -maxwarn 10 -o $SolvMartiniTPR
+grompp -f martini_md.mdp -c $SolvMinGRO -p $SolvMBTOP -maxwarn 10 -o $SolvMartiniTPR
 tmux new-session -d -s martini_run 'mdrun -deffnm SolvMartini -v'
 tmux detach -s martini_run
