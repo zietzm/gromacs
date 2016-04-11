@@ -104,3 +104,13 @@ mdrun -deffnm $SolvMin -v -nt 1
 grompp -f martini_md.mdp -c $SolvMinGRO -p $SolvMBTOP -maxwarn 10 -o $SolvMartiniTPR
 tmux new-session -d -s martini_run 'mdrun -deffnm SolvMartini -v'
 tmux detach -s martini_run
+
+# Sort all output files
+mkdir inputs
+mkdir results
+mkdir intermediates
+mkdir general-files
+mv $InitGRO $InitPDB $InitCSV dbpc_single.itp dppc_single.itp inputs/
+mv $NewCompPDB $NewCompCSV $NewCompTOP $MixGRO $MixMinTPR $MixMinGRO $MixMinPDB $MixMinCSV $MixNoWPDB $MixNoWTOP $MixNoWGRO $MixNoWCSV $BigNoWGRO $BoxNoWGRO $SolvMBGRO $SolvMBPDB $SolvMBCSV $SolvMinGRO $SolvMinTPR $SolvMin2TPR $SolvMin2GRO $SolvMartiniTPR intermediates/
+mv cg_bonds.tcl ChangeBox.py Composition_Change.py Remove_Water.py PDB_to_CSV.py TopologyBuilder.py water.gro general-files/
+mv $SolvMBTOP results/
