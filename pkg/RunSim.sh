@@ -44,10 +44,10 @@ python MDATopBuilder.py Solv.gro Solv
 grompp -f minim.mdp -c Solv.gro -p Solv.top -maxwarn 10 -o SolvMin.tpr
 mdrun -deffnm SolvMin -v -nt 1
 
+##
 #SYSTEM IS BLOWING UP BECAUSE ENERGIES TOO HIGH. NEED MORE PRELIM. MINIMIZATION
-#INCLUDE POSITION RESTRAINT FILE IN TOPOLOGY FOR THIS MINIMIZATION.
-# grompp -f MINIM.mdp -c $SolvMinGRO -p $SolvMBTOP -maxwarn 10 -o $SolvMin2TPR
-# mdrun -deffnm $SolvMin2 -v
+#INCLUDE ***POSITION RESTRAINT*** FILE IN TOPOLOGY FOR THIS MINIMIZATION.
+##
 
 # Production Run
 grompp -f martini_md.mdp -c SolvMin.gro -p Solv.top -maxwarn 10 -o SolvMartini.tpr
