@@ -15,3 +15,10 @@ perfect, they were-- for the most part-- working quite well for the tasks prescr
 
 This new tool will-- at absolute minimum at this moment-- facilitate atom selection in various file formats. At very minimum, this
 capability makes the most tricky python script obsolete, PDB_to_CSV.py. 
+
+Note: 
+If we are using Jupyter notebook, include the following to plot whatever we want.
+
+%matplotlib inline
+import matplotlib
+import matplotlib.pyplot as plt
