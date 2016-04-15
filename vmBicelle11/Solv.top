@@ -1,0 +1,12 @@
+#include "martini_v2.1.itp"
+#include "dppc_single.itp"
+#include "dbpc_single.itp"
+
+[ system ]
+MIXED BILAYER
+
+[ molecules ]
+DBPC 315
+DPPC 837
+#include "posre.itp"
+W 31000

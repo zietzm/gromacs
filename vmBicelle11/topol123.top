@@ -1,0 +1,20 @@
+;
+;	File 'topol123.top' was generated
+;	By user: michael (1000)
+;	On host: michael-desktop
+;	At date: Fri Apr 15 11:45:50 2016
+;
+;	This is a standalone topology file
+;
+;	It was generated using program:
+;	pdb2gmx - VERSION 4.6.5
+;
+;	Command line was:
+;	pdb2gmx -f SolvMin.gro -o SolvMin2.gro -p topol123.top -i posre123.itp 
+;
+;	Force field was read from the standard Gromacs share directory.
+;
+
+; Include forcefield parameters
+#include "amber03.ff/forcefield.itp"
+

@@ -2,7 +2,7 @@
 
 ### LIPID BICELLE ASSEMBLY
 ###
-### LAST UPDATED 14 APR 2016
+### LAST UPDATED 15 APR 2016
 
 ### REQUIRED FILES:
 # dppc_bilayer.gro (FROM MARTINI WEB)
@@ -19,9 +19,9 @@
 
 source /usr/local/gromacs/bin/GMXRC
 
-#Edit a number of lipids in the DPPC bilayer to be DBPC. Output top
-python MDACompChange.py 35 dppc_bilayer.gro NewComp
-python MDATopBuilder.py NewComp.gro NewComp.top ## EDIT TO BE CORRECT ORDER
+#Edit 35 lipids in the DPPC bilayer to be DBPC. Output top
+python MDACompChange.py dppc_bilayer.gro NewComp
+python MDATopBuilder.py NewComp.gro NewComp.top
 
 #Minimize the changed bilayer
 grompp -f minim.mdp -c NewComp.gro -p NewComp.top -maxwarn 10 -o MinNC.tpr
@@ -49,11 +49,8 @@ mdrun -deffnm SolvMin -v -nt 1
 make_ndx -f SolvMin.gro -o index.ndx
 genrestr -f SolvMin.gro -n index.ndx -o posre.itp
 
-##
-#SYSTEM IS BLOWING UP BECAUSE ENERGIES TOO HIGH. NEED MORE PRELIM. MINIMIZATION
-#INCLUDE ***POSITION RESTRAINT*** FILE IN TOPOLOGY FOR THIS MINIMIZATION.
-##
-grompp -f Posremin.mdp -c SolvMin.gro -p Solv.top -maxwarn 10 -o SolvMartini.tpr
+
+grompp -f Posremin.mdp -c SolvMin.gro -p SolvPR.top -maxwarn 10 -o SolvMartini.tpr
 mdrun -deffnm SolvMartini -v
 
 # Production Run
