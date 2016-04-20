@@ -6,7 +6,7 @@ infile = sys.argv[1] #GRO file
 outtop = sys.argv[2] #FULL file name TOP
 new = mda.Universe(infile)
 
-# Count the number of atoms of each molecule.
+# Count the number of each molecule.
 numDBPC = new.select_atoms("resname DBPC")
 numDPPC = new.select_atoms("resname DPPC")
 numW = new.select_atoms("resname W")
@@ -22,9 +22,9 @@ if nwat == 0:
     comm = comm + ';'
 
 top = open(outtop, 'w')
-top.write('#include "martini_v2.1.itp"'+ '\n'
-           '#include "dppc_single.itp"'+'\n'
-           '#include "dbpc_single.itp"'+'\n'
+top.write('#include "top-martini-v2.1.itp"'+ '\n'
+           '#include "top-dppc-single.itp"'+'\n'
+           '#include "top-dbpc-single.itp"'+'\n'
            '\n'
           '[ system ]' +'\n'
           'MIXED BILAYER'+'\n'
