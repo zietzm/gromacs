@@ -1,7 +1,6 @@
 ;
 ; STANDARD MD INPUT OPTIONS FOR MARTINI 2.x
 ; Updated 02 feb 2013 by DdJ
-; Also Updated 18 mar 2016 23:20 by mz
 ;
 ; for use with GROMACS 4.5/4.6
 ;
@@ -20,9 +19,9 @@ title                    = Martini
 ; than 20 fs are also not required unless specifically stated in the itp file.
 
 
-integrator               = md
-dt                       = 0.02 ; 0.02 ps = 20 fs
-nsteps                   = 2500000 ; 50 ns
+integrator               = steep ; Run steepest descent energy minimization algorithm
+dt                       = 0.04
+nsteps                   = 10000  ; Number of steep steps to run
 nstcomm                  = 100
 comm-grps		 =
 
@@ -30,15 +29,15 @@ comm-grps		 =
 ; OUTPUT CONTROL OPTIONS =
 ; Output frequency for coords (x), velocities (v) and forces (f) =
 
-nstxout                  = 0
-nstvout                  = 0
+nstxout                  = 5000
+nstvout                  = 5000
 nstfout                  = 0
 nstlog                   = 1000  ; Output frequency for energies to log file
 nstenergy                = 100   ; Output frequency for energies to energy file
 nstxtcout                = 1000  ; Output frequency for .xtc file
 xtc_precision            = 100
 xtc-grps                 =
-energygrps               = DPPC DBPC W
+energygrps               = System
 
 
 ; NEIGHBOURLIST and MARTINI
@@ -51,9 +50,9 @@ energygrps               = DPPC DBPC W
 ; and/or enlarge the neighbourlist cut-off (to 1.4 nm). The latter option
 ; is computationally less expensive and leads to improved energy conservation
 
-nstlist                  = 10 ; As listed in Jiang, neighbor list update every  10 time steps
-ns_type                  = grid ; As listed in Jiang, grid type neighbor search
-pbc                      = xyz ; As requested, 3D PBC -mz
+nstlist                  = 10
+ns_type                  = grid
+pbc                      = xyz
 rlist                    = 1.4
 
 ; MARTINI and NONBONDED
@@ -84,46 +83,18 @@ rlist                    = 1.4
 ; your particular system. The advantage is a gain of speed of 50-100%.
 
 coulombtype              = Shift  ;Reaction_field (for use with Verlet-pairlist) ;PME (especially with polarizable water)
-rcoulomb_switch          = 0.0  ; 0-1.2 nm
-rcoulomb                 = 1.2 ; As listed in Jiang, 1.2 nm coulomb shift -mz
+rcoulomb_switch          = 0.0
+rcoulomb                 = 1.2
 epsilon_r                = 15	; 2.5 (with polarizable water)
 vdw_type                 = Shift  ;cutoff (for use with Verlet-pairlist)
-rvdw_switch              = 0.9  ; As listed in Jiang, .9 to 1.2 nm VDW shift
+rvdw_switch              = 0.9
 rvdw                     = 1.2	;1.1 (for use with Verlet-pairlist)
 
-
-; MARTINI and TEMPERATURE/PRESSURE
-; normal temperature and pressure coupling schemes can be used.
-; It is recommended to couple individual groups in your system separately.
-; Good temperature control can be achieved with the velocity rescale (V-rescale)
-; thermostat using a coupling constant of the order of 1 ps. Even better
-; temperature control can be achieved by reducing the temperature coupling
-; constant to 0.1 ps, although with such tight coupling (approaching
-; the time step) one can no longer speak of a weak-coupling scheme.
-; We therefore recommend a coupling time constant of at least 0.5 ps.
-; The Berendsen thermostat is less suited since it does not give
-; a well described thermodynamic ensemble.
-;
-; Pressure can be controlled with the Parrinello-Rahman barostat,
-; with a coupling constant in the range 4-8 ps and typical compressibility
-; in the order of 10-4 - 10-5 bar-1. Note that, for equilibration purposes,
-; the Berendsen barostat probably gives better results, as the Parrinello-
-; Rahman is prone to oscillating behaviour. For bilayer systems the pressure
-; coupling should be done semiisotropic.
-
-tcoupl                   = berendsen  ; As listed in Jiang, temperature is coupled by berendsen
-tc-grps                  = DPPC DBPC W
-tau_t                    = 1.0  1.0 1.0 ; temperature coupling time constant
-ref_t                    = 323 323 323  ; Per Jiang, 323K done individually
-Pcoupl                   = berendsen  ; parrinello-rahman ; parrinello-rahman
-Pcoupltype               = semiisotropic  ; semiisotropic means isotropic in x/y directions but different in z. Needs 2 values. -mz
-tau_p                    = 3.0 3.0        ; 12.0 12.0  ;x/y z values
-compressibility          = 5e-5 0       ; We want no z compressibility and 5e-5 x/y
-ref_p                    = 1.0 1.0        ; 1.0 1.0
-
-gen_vel                  = yes
-gen_temp                 = 323
-gen_seed                 = 473529
+;cutoff-scheme            = verlet
+;coulomb-modifier         = Potential-shift
+;vdw-modifier             = Potential-shift
+;epsilon_rf               = 0   ; epsilon_rf = 0 really means epsilon_rf = infinity
+;verlet-buffer-drift      = 0.005
 
 
 ; MARTINI and CONSTRAINTS
