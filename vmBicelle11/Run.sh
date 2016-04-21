@@ -18,7 +18,9 @@ python py-change-box.py gmx-replicated.gro gmx-large.gro
 editconf -f gmx-large.gro -o gmx-centered.gro -center 12.5 12.5 5.25
 
 #Add water. For same conc., need total 32000
-genbox -cp gmx-centered.gro -cs str-water.gro -maxsol 14000 -vdwd 0.21 -o gmx-full-water.gro
+#What if here we removed all water and then solvated evenly?
+python py-remove-water.py gmx-centered.gro gmx-nowater.gro
+genbox -cp gmx-nowater.gro -cs str-water.gro -maxsol 32000 -vdwd 0.21 -o gmx-full-water.gro
 
 #Output topology
 python py-top-builder.py gmx-full-water.gro gmx-large-top.top
@@ -37,6 +39,9 @@ mdrun -deffnm em-prm -v -nt 4 #Blowing up. Need -nt 1
 
 grompp -f em-max.mdp -c em-prm.gro -p gmx-posre-top.top -maxwarn 10 -o em-prm2.tpr
 mdrun -deffnm em-prm2 -v -nt 8 #Gradually scale up thread usage
+
+grompp -f em-max.mdp -c em-prm2.gro -p gmx-posre-top.top -maxwarn 10 -o em-prm3.tpr
+mdrun -deffnm em-prm3 -v
 
 #Position restraint minimization
 grompp -f md-posre.mdp -c em-prm2.gro -p gmx-posre-top.top -maxwarn 10 -o em-posre.tpr
