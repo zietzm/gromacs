@@ -1,0 +1,11 @@
+#include "top-martini-v2.1.itp"
+#include "top-dppc-posre-all.itp"
+#include "top-dbpc-posre-all.itp"
+
+[ system ]
+ALL RESTRAINED MIXED BILAYER
+
+[ molecules ]
+DBPC 315
+DPPC 837
+W 40732

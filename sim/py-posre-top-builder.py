@@ -23,11 +23,11 @@ if nwat == 0:
 
 top = open(outtop, 'w')
 top.write('#include "top-martini-v2.1.itp"'+ '\n'
-           '#include "top-dppc-single.itp"'+'\n'
-           '#include "top-dbpc-single.itp"'+'\n'
+           '#include "top-dppc-posre.itp"'+'\n'
+           '#include "top-dbpc-posre.itp"'+'\n'
            '\n'
           '[ system ]' +'\n'
-          'MIXED BILAYER'+'\n'
+          'RESTRAINED MIXED BILAYER'+'\n'
           '\n'
           '[ molecules ]'+'\n'
           'DBPC %s' % ndb +'\n'
