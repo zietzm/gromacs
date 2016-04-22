@@ -39,16 +39,10 @@ mdrun -deffnm em-watermin -v #-nt 1
 grompp -f em-max.mdp -c em-watermin.gro -p gmx-posre-top.top -maxwarn 10 -o em-prm.tpr
 mdrun -deffnm em-prm -v #nt 4 #Blowing up. Need nt 1
 
-# grompp -f em-max.mdp -c em-prm.gro -p gmx-posre-top.top -maxwarn 10 -o em-prm2.tpr
-# mdrun -deffnm em-prm2 -v -nt 8 #Gradually scale up thread usage
-
-# grompp -f em-max.mdp -c em-prm2.gro -p gmx-posre-top.top -maxwarn 10 -o em-prm3.tpr
-# mdrun -deffnm em-prm3 -v
-
 #Position restraint minimization
 grompp -f md-posre.mdp -c em-prm.gro -p gmx-posre-top.top -maxwarn 10 -o em-posre.tpr
 mdrun -deffnm em-posre -v
 
 #Production run
-grompp -f md-prod.mdp -c em-posre.gro -p gmx-large-top.top -maxwarn 10 -o md-pr.tpr
+grompp -f md-martini.mdp -c em-posre.gro -p gmx-large-top.top -maxwarn 10 -o md-pr.tpr
 mdrun -deffnm md-pr -v
