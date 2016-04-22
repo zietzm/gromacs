@@ -17,3 +17,6 @@ GitHub.
 2. Stage our altered file. <pre><code>git add FILE.EXT</code></pre>
 3. Commit changes. <pre><code>git commit -m "Comment" </code></pre>
 4. Push changes to GitHub. <pre><code>git push origin master</code></pre>
+
+By using Visual Studio Code, we can skip the command line GitHub for the time being. We simply stage, type a message, 
+commit, and push changes from the GitHub panel on the left side.
