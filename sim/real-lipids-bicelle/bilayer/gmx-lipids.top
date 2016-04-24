@@ -1,0 +1,11 @@
+#include "top-martini-v2.1.itp"
+#include "top-dxpc-single.itp"
+#include "top-dtpc-single.itp"
+
+[ system ]
+MIXED BILAYER
+
+[ molecules ]
+DXPC 128
+;DTPC 0
+W 2000
