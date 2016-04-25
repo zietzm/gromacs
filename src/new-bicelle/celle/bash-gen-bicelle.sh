@@ -1,4 +1,5 @@
 #!/bin/bash
+set -e
 
 ### Requires the following files:
 ### bash-gen-bicelle.sh
