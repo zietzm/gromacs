@@ -7,30 +7,36 @@ outtop = sys.argv[2] #FULL file name TOP
 new = mda.Universe(infile)
 
 # Count the number of each molecule.
-numDBPC = new.select_atoms("resname DBPC")
-numDPPC = new.select_atoms("resname DPPC")
+numDXPC = new.select_atoms("resname DXPC")
+numDTPC = new.select_atoms("resname DTPC")
 numW = new.select_atoms("resname W")
 
 #Account for the number of atoms in each molecule
-ndb = len(np.unique(numDBPC.resids))
-ndp = len(np.unique(numDPPC.resids))
+ndx = len(np.unique(numDXPC.resids))
+ndt = len(np.unique(numDTPC.resids))
 nwat = len(np.unique(numW.resids))
 
 #Comment out water if there isn't any
-comm = ''
+comX = ''
+if ndx == 0:
+	comX = comX + ';'
+comT = ''
+if ndt == 0:
+	comT = comT + ';'
+comW = ''
 if nwat == 0:
-    comm = comm + ';'
-
+	comW = comW + ';'
+    
 top = open(outtop, 'w')
 top.write('#include "top-martini-v2.1.itp"'+ '\n'
-           '#include "top-dppc-posre.itp"'+'\n'
-           '#include "top-dbpc-posre.itp"'+'\n'
+           '#include "top-dxpc-posre.itp"'+'\n'
+           '#include "top-dtpc-posre.itp"'+'\n'
            '\n'
           '[ system ]' +'\n'
           'RESTRAINED MIXED BILAYER'+'\n'
           '\n'
           '[ molecules ]'+'\n'
-          'DBPC %s' % ndb +'\n'
-          'DPPC %s' % ndp +'\n'
-          '%sW %s' % (comm, nwat) +'\n')
+          '%sDXPC %s' % (comX, ndx) +'\n'
+          '%sDTPC %s' % (comT, ndt) +'\n'
+          '%sW %s' % (comW, nwat) +'\n')
 top.close()

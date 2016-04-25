@@ -1,7 +1,8 @@
 source /usr/local/gromacs/bin/GMXRC
 
 #Save coordinates from the final frame. Note: dump should be the last frame. NOTE: ADD VELOCITIES !!
-trjconv -f md-pr.xtc -s md-pr.tpr -dump 12500 -o str-bicelle.gro 
+echo "0" | trjconv -f md-pr.xtc -s md-pr.tpr -dump 250000 -o TEST.gro 
+echo "0" | trjconv -f trajfixed.xtc -s md-pr.tpr -dump 250000 -o TEST2.gro
 
 # #Remove water from trajectory to decrease file size. For automation, probably need ndx file
 # trjconv -f trajfixed.xtc -s md-pr.tpr -o trajfixed-nowater.xtc 

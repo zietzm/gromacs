@@ -10,3 +10,10 @@ This will require a large overhaul of many python files and input parameters.
 
 We also have to create and minimize our own DXPC bilayer. In the previous run, we were able to use a
 pre-made bilayer from Martini.
+
+Outline:
+1. Generate a bilayer using the 'layer' directory
+2. Take the output of 'layer' and, using the 'celle' directory, convert it to a bicelle.
+
+Specifics for each step can be found in subdirectory README files. It is the goal of this file structure
+for bash files to be all that is required for total completion of each step.

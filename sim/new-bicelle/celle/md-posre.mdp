@@ -22,7 +22,7 @@ title                    = Martini
 
 integrator               = md
 dt                       = 0.02 ; 0.02 ps = 20 fs
-nsteps                   = 12500000 ; 15,000,000 * .02 = 300 ns
+nsteps                   = 2500000 ; 50 ns
 nstcomm                  = 100
 comm-grps		 =
 
@@ -38,7 +38,7 @@ nstenergy                = 100   ; Output frequency for energies to energy file
 nstxtcout                = 1000  ; Output frequency for .xtc file
 xtc_precision            = 100
 xtc-grps                 =
-energygrps               = DPPC DBPC W
+energygrps               = DXPC DTPC W
 
 
 ; NEIGHBOURLIST and MARTINI
@@ -112,7 +112,7 @@ rvdw                     = 1.2	;1.1 (for use with Verlet-pairlist)
 ; coupling should be done semiisotropic.
 
 tcoupl                   = berendsen  ; As listed in Jiang, temperature is coupled by berendsen
-tc-grps                  = DPPC DBPC W
+tc-grps                  = DTPC DXPC W
 tau_t                    = 1.0  1.0 1.0 ; temperature coupling time constant
 ref_t                    = 323 323 323  ; Per Jiang, 323K done individually
 Pcoupl                   = berendsen  ; parrinello-rahman ; parrinello-rahman
