@@ -16,9 +16,11 @@ resnames = list(np.unique(list(new.atoms.resnames)))
 molecule_out = ''
 itp_include = ''
 for i in resnames:
-    molecule_out = molecule_out +str(i + ' ' + str(len(np.unique(new.select_atoms("resname %s" % i).resids))) + '\n')
+    molecule_out = molecule_out +str(i + ' ' + 
+        str(len(np.unique(new.select_atoms("resname %s" % i).resids))) + '\n')
     if i != 'W':
-        itp_include = itp_include + str('#include "top-' + i.lower() + '-' + type_of_top + '.itp"' + '\n')
+        itp_include = itp_include + str('#include "top-' + i.lower() + '-' + 
+            type_of_top + '.itp"' + '\n')
 
 top = open(outtop, 'w')
 top.write(';::\n;;; Generated using py-general-top.py \n;;;\n\n'
