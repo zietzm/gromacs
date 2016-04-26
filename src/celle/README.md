@@ -7,11 +7,9 @@ Required files to generate a bicelle:
 * md-posre.mdp
 * py-change-box.py
 * py-comp-change.py
-* py-posre-all-top-builder.py
-* py-posre-top-builder.py
 * py-remove-water.py
 * py-reorder.py
-* py-top-builder.py
+* py-general-top.py
 * README.md
 * str-dxpc-bilayer.gro (copy of gmx-bilayer.gro)
 * str-water.gro
