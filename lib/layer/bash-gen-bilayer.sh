@@ -7,15 +7,15 @@ set -e
 ### md-bilayer.mdp
 ### py-top-builder.py
 ### README.md
-### str-dxpc-single.gro
+### str-dppc-single.gro
 ### str-water.gro
-### top-dtpc-single.itp
-### top-dxpc-single.itp
+### top-dhpc-single.itp
+### top-dppc-single.itp
 ### top-martini-v2.1.itp
 
 source /usr/local/gromacs/bin/GMXRC
 
-genbox -ci str-dxpc-single.gro -box 6.31915 6.46099 10.05482 -nmol 128 -try 1000 -o gmx-vac-lipids.gro
+genbox -ci str-dppc-single.gro -box 6.31915 6.46099 10.05482 -nmol 128 -try 1000 -o gmx-vac-lipids.gro
 python py-top-builder.py gmx-vac-lipids.gro gmx-vac.top
 
 grompp -f em.mdp -c gmx-vac-lipids.gro -p gmx-vac.top -maxwarn 10 -o em-vac.tpr

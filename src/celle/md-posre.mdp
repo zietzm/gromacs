@@ -38,7 +38,7 @@ nstenergy                = 100   ; Output frequency for energies to energy file
 nstxtcout                = 1000  ; Output frequency for .xtc file
 xtc_precision            = 100
 xtc-grps                 =
-energygrps               = DXPC DTPC W
+energygrps               = DPPC DTPC W
 
 
 ; NEIGHBOURLIST and MARTINI
@@ -112,7 +112,7 @@ rvdw                     = 1.2	;1.1 (for use with Verlet-pairlist)
 ; coupling should be done semiisotropic.
 
 tcoupl                   = berendsen  ; As listed in Jiang, temperature is coupled by berendsen
-tc-grps                  = DTPC DXPC W
+tc-grps                  = DTPC DPPC W
 tau_t                    = 1.0  1.0 1.0 ; temperature coupling time constant
 ref_t                    = 323 323 323  ; Per Jiang, 323K done individually
 Pcoupl                   = berendsen  ; parrinello-rahman ; parrinello-rahman
