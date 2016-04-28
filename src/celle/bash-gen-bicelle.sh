@@ -6,7 +6,6 @@ set -e
 ### em.mdp
 ### md-martini.mdp
 ### md-posre.mdp
-### py-change-box.py
 ### py-comp-change.py
 ### py-general-top.py
 ### py-remove-water.py
@@ -31,9 +30,9 @@ grompp -f em.mdp -c gmx-mixed-bilayer.gro -p gmx-mixed-top.top -maxwarn 10 -o em
 mdrun -deffnm em-mix-bil -v -nt 1
 
 genconf -f em-mix-bil.gro -o gmx-replicated.gro -nbox 3 3 1
-python py-change-box.py gmx-replicated.gro gmx-large.gro
-editconf -f gmx-large.gro -o gmx-centered.gro -center 12.5 12.5 6.25
-python py-remove-water.py gmx-centered.gro gmx-nowater.gro
+editconf -f gmx-replicated.gro -o gmx-large.gro -box 25 25 12
+
+python py-remove-water.py gmx-large.gro gmx-nowater.gro
 genbox -cp gmx-nowater.gro -cs str-water.gro -vdwd 0.21 -o gmx-full-water.gro
 
 python py-reorder.py gmx-full-water.gro gmx-ordered
@@ -45,7 +44,13 @@ grompp -f em.mdp -c gmx-ordered.gro -p gmx-posre-all-top.top -maxwarn 10 -o em-w
 mdrun -deffnm em-watermin -v 
 grompp -f em.mdp -c em-watermin.gro -p gmx-posre-top.top -maxwarn 10 -o em-prm.tpr
 mdrun -deffnm em-prm -v
+
+chmod+x bash-prod-run.sh
+tmux new-session -d -s prod_run './bash-prod-run.sh'
+
 grompp -f md-posre.mdp -c em-prm.gro -p gmx-posre-top.top -maxwarn 10 -o em-posre.tpr
 mdrun -deffnm em-posre -v
 grompp -f md-martini.mdp -c em-posre.gro -p gmx-large-top.top -maxwarn 10 -o md-pr.tpr
-tmux new-session -d -s prod_run 'mdrun -deffnm md-pr -v'
+mdrun -deffnm md-pr -v
+
+# editconf -f gmx-large.gro -o gmx-centered.gro -center 12.5 12.5 6 #EDITCONF AUTOMATICALLY CENTERS

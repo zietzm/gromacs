@@ -1,3 +1,9 @@
+#Bicelle Generation Procedure
+This directory will generate a bicelle from Martini's given, "dppc_bilayer.gro" file, available on
+Martini's website. In the next few days, this directory will be completed, and python files will
+be totally generalized. 
+
+
 Required files to generate a bicelle:
 
 * Requires the following files:
