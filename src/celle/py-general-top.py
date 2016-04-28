@@ -1,3 +1,6 @@
+# Note: usage in terminal is '$ python py-general-top.py input.gro output.top type'
+# Where 'type' could be 'single', 'posre', or 'posre-all'. Posre is just lipid headgroups.
+
 import sys
 import MDAnalysis as mda
 import numpy as np

@@ -25,7 +25,7 @@ set -e
 source /usr/local/gromacs/bin/GMXRC
 
 python py-comp-change.py str-dppc-bilayer.gro gmx-mixed-bilayer
-python py-top-builder.py gmx-mixed-bilayer.gro gmx-mixed-top.top
+python py-general-top.py gmx-mixed-bilayer.gro gmx-mixed-top.top single
 
 grompp -f em.mdp -c gmx-mixed-bilayer.gro -p gmx-mixed-top.top -maxwarn 10 -o em-mix-bil.tpr
 mdrun -deffnm em-mix-bil -v -nt 1
@@ -37,9 +37,9 @@ python py-remove-water.py gmx-centered.gro gmx-nowater.gro
 genbox -cp gmx-nowater.gro -cs str-water.gro -vdwd 0.21 -o gmx-full-water.gro
 
 python py-reorder.py gmx-full-water.gro gmx-ordered
-python py-top-builder.py gmx-full-water.gro gmx-large-top.top
-python py-posre-top-builder.py gmx-full-water.gro gmx-posre-top.top
-python py-posre-all-top-builder.py gmx-full-water.gro gmx-posre-all-top.top
+python py-general-top.py gmx-full-water.gro gmx-large-top.top single
+python py-general-top.py gmx-full-water.gro gmx-posre-top.top posre
+python py-general-top.py gmx-full-water.gro gmx-posre-all-top.top posre-all
 
 grompp -f em.mdp -c gmx-ordered.gro -p gmx-posre-all-top.top -maxwarn 10 -o em-watermin.tpr
 mdrun -deffnm em-watermin -v 

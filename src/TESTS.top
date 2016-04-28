@@ -1,0 +1,12 @@
+#include "martini.itp"
+
+[ system ]
+; name
+Protein in INSANE! Membrane UpperLeaflet>DPPC=1 LowerLeaflet>DPPC=1
+
+[ molecules ]
+; name  number
+Protein        1
+DPPC           981
+DPPC           993
+W            28207

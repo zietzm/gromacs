@@ -1645,7 +1645,7 @@ print >>oStream, "%10.5f%10.5f%10.5f%10.5f%10.5f%10.5f%10.5f%10.5f%10.5f\n"%grob
 if options["-p"]:
     # Write a rudimentary topology file
     top = open(options["-p"].value,"w")
-    print >>top, '#include "martini.itp"\n'
+    print >>top, '#include "martini.itp\n#include "top-martini-all-lipids.itp"\n#include "Protein_A.itp"\n#include "Protein_B.itp"\n'
     print >>top, '[ system ]\n; name\n%s\n\n[ molecules ]\n; name  number'%title
     if protein:
         print >>top, "%-10s %5d"%("Protein",1)
