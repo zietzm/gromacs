@@ -44,10 +44,6 @@ grompp -f em.mdp -c gmx-ordered.gro -p gmx-posre-all-top.top -maxwarn 10 -o em-w
 mdrun -deffnm em-watermin -v 
 grompp -f em.mdp -c em-watermin.gro -p gmx-posre-top.top -maxwarn 10 -o em-prm.tpr
 mdrun -deffnm em-prm -v
-
-chmod+x bash-prod-run.sh
-tmux new-session -d -s prod_run './bash-prod-run.sh'
-
 grompp -f md-posre.mdp -c em-prm.gro -p gmx-posre-top.top -maxwarn 10 -o em-posre.tpr
 mdrun -deffnm em-posre -v
 grompp -f md-martini.mdp -c em-posre.gro -p gmx-large-top.top -maxwarn 10 -o md-pr.tpr

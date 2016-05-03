@@ -10,3 +10,6 @@ Protein        1
 DPPC           981
 DPPC           993
 W            28207
+
+;It would be really helpful if we could find out how to
+;make the Protein always a single molecule in top.
