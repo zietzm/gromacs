@@ -1,0 +1,18 @@
+#!/bin/bash
+#PBS -q normal
+#PBS -l nodes=2:ppn=16:native
+#PBS -l walltime=12:00:00
+#PBS -N bicelle
+#PBS -o gen-bic.out
+#PBS -A upa124
+#PBS -M zietz@sas.upenn.edu
+#PBS -m abe
+
+set -e
+module load gromacs/5.0.2
+
+gmx grompp -f md-5-posre.mdp -c str-ordered.gro -p gmx-top-posre.top -o em-posre.tpr -maxwarn 10 
+gmx mdrun -s em-posre.tpr -o em-posre.trr -x em-posre.xtc -c em-posre.gro -e em-posre.edr -g em-posre.log
+
+gmx grompp -f md-5-martini.mdp -c em-posre.gro -p gmx-large-top.top -o gmx-pr.tpr -maxwarn 10
+gmx mdrun -s gmx-pr.tpr -o gmx-pr.trr -x gmx-pr.xtc -c gmx-pr.gro -e gmx-pr.edr -g gmx-pr.log 

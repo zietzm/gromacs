@@ -1,0 +1,1 @@
+Formin binding protein 17 is fbp17, downloaded from PDB as 2efl.pdb

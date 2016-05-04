@@ -1,0 +1,78 @@
+;
+; Made by Michael Zietz
+; 03 MAY 2016
+; 
+; for Gromacs 5
+;
+
+title                       = Martini Production Run
+
+; Run Control
+
+integrator                  = md                ; Newtons eq leapfrog integrator
+dt                          = 0.03              ; 0.03 ps is 30 fs is 3x10^-5 ns
+nsteps                      = 10000000          ; 10,000,000 steps is 300 ns
+nstcomm                     = 100               ; remove center of mass motion every 100 steps (default)
+
+; Output Control
+
+nstxout                     = 10                ; Skip frames between writing each position to xtc (last always written)
+nstvout                     = 10                ; Skip frames between writing each velocity (last always written)
+nstfout                     = 10                ; Skip frames between writing each force (last always written)
+nstlog                      = 1000              ; Skip 1000 frames betweeen writing to log file (last always written) (default)
+nstenergy                   = 100               ; Skip 100 frames in writing energy.(last always written) (default) 
+nstxout-compressed          = 0                 ; Skip 0 frames in writing water coordinates (lossy compression)
+compressed-x-precision      = 100               ; coordinates (nm) * 100 -> round to integer
+compressed-x-grps           = DPPC DTPC         ; Only write lipids to xtc compressed file
+
+; Neighbourlist and Martini
+
+cutoff-scheme               = group             ; Generally used for Martini
+nstlist                     = 10                ; Freq to update neighbor list in steps (default)
+ns-type                     = grid              ; Check atoms in neighboring grid cells
+pbc                         = xyz               ; PBC in all directions
+periodic-molecules          = no                ; Molecules are finite. Faster PBC use
+rlist                       = 1.4               ; Cut-off distance for short-range neighborlist (martini default)
+
+; Electrostatics and VDW
+
+coulombtype                 = Shift             ; Reaction field zero is maybe better ?? Ask Ryan
+coulomb-modifier            = None              ; 
+rcoulomb-switch             = 0.0               ; Electrostatic interactions zero in this range (default)
+rcoulomb                    = 1.2               ; 
+epsilon-r                   = 15                ; Relative dialectric constant
+epsilon-rf                  = 0                 ; Relative dialectric constant of reaction field (default)
+vdwtype                     = Shift             ; Technically deprecated??
+vdw-modifier                = Potential-switch
+rvdw-switch                 = 0.9               ; Martini recommendation
+rvdw                        = 1.2               ;
+
+; Temperature coupling
+
+tcoupl                      = berendsen         ; Per Jiang, not Martini. Berendsen better for equilibration
+tc-grps                     = DPPC DTPC W       ; Separately couple temperature groups
+tau-t                       = 1.0 1.0 1.0       ; Time constant for coupling (ps)
+ref-t                       = 323 323 323       ; Per Jiang. DPPC fluid above 315 K
+
+; Pressure coupling
+
+pcoupl                      = berendsen         ; 
+pcoupltype                  = semiisotropic     ; same in x and y but different in z
+tau-p                       = 3.0 3.0           ; Coupling time constant 3 ps (xy z) (ps)
+compressibility             = 5e-5 0            ; No z compressibility (1/bar)
+ref-p                       = 1.0 1.0           ; External pressure (bar)
+
+; Velocity generation
+
+gen-vel                     = yes               ; Generate velocities. Only good for md integrator
+gen-temp                    = 323
+gen-seed                    = 473529            ; Random number seed
+
+; Bonds
+
+constraints                 = none              ;
+constraint-algorithm        = LINCS             ;
+continuation                = no                ;
+lincs-order                 = 4                 ; (default)
+lincs-warnangle             = 30                ; (default) (degrees)
+

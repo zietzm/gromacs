@@ -1,0 +1,15 @@
+;::
+;;; Generated using py-general-top.py 
+;;;
+
+#include "top-martini-v2.1.itp"
+#include "top-dppc-posre.itp"
+#include "top-dtpc-posre.itp"
+
+[ system ]
+LIPID SYSTEM TOPOLOGY
+
+[ molecules ]
+DPPC 1360
+DTPC 688
+W 78280

@@ -29,8 +29,8 @@ python py-general-top.py gmx-mixed-bilayer.gro gmx-mixed-top.top single
 grompp -f em.mdp -c gmx-mixed-bilayer.gro -p gmx-mixed-top.top -maxwarn 10 -o em-mix-bil.tpr
 mdrun -deffnm em-mix-bil -v -nt 1
 
-genconf -f em-mix-bil.gro -o gmx-replicated.gro -nbox 3 3 1
-editconf -f gmx-replicated.gro -o gmx-large.gro -box 25 25 12
+genconf -f em-mix-bil.gro -o gmx-replicated.gro -nbox 4 4 1
+editconf -f gmx-replicated.gro -o gmx-large.gro -box 32 32 12
 
 python py-remove-water.py gmx-large.gro gmx-nowater.gro
 genbox -cp gmx-nowater.gro -cs str-water.gro -vdwd 0.21 -o gmx-full-water.gro
@@ -48,5 +48,3 @@ grompp -f md-posre.mdp -c em-prm.gro -p gmx-posre-top.top -maxwarn 10 -o em-posr
 mdrun -deffnm em-posre -v
 grompp -f md-martini.mdp -c em-posre.gro -p gmx-large-top.top -maxwarn 10 -o md-pr.tpr
 mdrun -deffnm md-pr -v
-
-# editconf -f gmx-large.gro -o gmx-centered.gro -center 12.5 12.5 6 #EDITCONF AUTOMATICALLY CENTERS
